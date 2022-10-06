@@ -6,12 +6,18 @@ function MainNavigation() {
     <header className={classes.header}>
       <nav>
         <ul>
-          <Link to="/">PriceFix</Link>
-          <li>
-            <Link to="/login">Login</Link>
+          <Link to="/">
+            <b>PriceFix</b>
+          </Link>
+          <li className="btn--black">
+            <Link to="/login">
+              <b>Login</b>
+            </Link>
           </li>
-          <li>
-            <Link to="/sign-up">Sign Up</Link>
+          <li className="btn--white">
+            <Link to="/sign-up">
+              <b>Sign Up</b>
+            </Link>
           </li>
         </ul>
       </nav>
