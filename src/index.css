@@ -16,6 +16,22 @@ h2 {
   color: #2c292b;
 }
 
+/* this is for the centralised PriceFix Logo */
+h3 {
+  font-size: 3rem;
+  color: #2c292b;
+  text-align: center;
+  font-weight: bolder;
+}
+
+/* this is for the words below the PriceFix logo
+ */
+h4 {
+  font-size: 1rem;
+  color: #2c292b;
+  text-align: center;
+}
+
 .btn--red {
   padding: 0.5rem 1.5rem;
   cursor: pointer;
