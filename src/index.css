@@ -97,3 +97,8 @@ h4 {
   top: 0;
   left: 0;
 }
+
+.text-small-regular {
+  font-size: 12;
+  font-weight: normal;
+}

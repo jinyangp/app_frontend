@@ -22,6 +22,12 @@ function MainNavigation() {
               <b>Sign Up</b>
             </Link>
           </li>
+
+          <li className="btn--white">
+            <Link to="/wishlist">
+              <b>Wish list</b>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>
