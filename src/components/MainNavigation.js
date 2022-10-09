@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
-import LargeBold from "./texts/LargeBold";
+// import LargeBold from "./texts/LargeBold";
 
 function MainNavigation() {
   return (
