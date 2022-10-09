@@ -98,7 +98,18 @@ h4 {
   left: 0;
 }
 
+/* font sizes */
 .text-small-regular {
   font-size: 12;
   font-weight: normal;
+}
+
+.text-normal-regular {
+  font-size: 16;
+  font-weight: normal;
+}
+
+.text-large-bold {
+  font-size: 32;
+  font-weight: bolder;
 }

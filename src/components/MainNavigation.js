@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
+import LargeBold from "./texts/LargeBold";
 
 function MainNavigation() {
   return (
@@ -8,7 +9,7 @@ function MainNavigation() {
       <nav>
         <ul>
           <Link to="/">
-            <b>PriceFix</b>
+            <b>PriceFix </b>
           </Link>
 
           <li className="btn--black">
