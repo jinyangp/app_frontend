@@ -17,12 +17,17 @@ function NewSignUpForm(props) {
     const enteredPassword = passwordInputRef.current.value;
     const enteredConfirmPassword = confirmPasswordInputRef.current.value;
 
+    // Check whether the password matches
+
+    // if they dont, show an error
+
+    // If match, then proceed on to make api request
+
     //   creating the user object that the user entered
     const userData = {
-      username: enteredUsername,
-      email: enteredEmail,
-      password: enteredPassword,
-      confirmPassword: enteredConfirmPassword,
+      userName: enteredUsername,
+      userEmail: enteredEmail,
+      userPassword: enteredPassword,
     };
 
     props.onAddUser(userData);
