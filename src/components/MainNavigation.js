@@ -12,6 +12,10 @@ function MainNavigation() {
             <b>PriceFix </b>
           </Link>
 
+          <Link to="/search-bar">
+            <b>Search Bar</b>
+          </Link>
+
           <li className="btn--black">
             <Link to="/login">
               <b>Login</b>
