@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
+import SearchBar from "./SearchBar";
 // import LargeBold from "./texts/LargeBold";
 
 function MainNavigation() {
@@ -9,12 +10,10 @@ function MainNavigation() {
       <nav>
         <ul>
           <Link to="/">
-            <b>PriceFix </b>
+            <h2>PriceFix </h2>
           </Link>
 
-          <Link to="/search-bar">
-            <b>Search Bar</b>
-          </Link>
+          <SearchBar />
 
           <li className="btn--black">
             <Link to="/login">
@@ -28,11 +27,11 @@ function MainNavigation() {
             </Link>
           </li>
 
-          <li className="btn--white">
+          {/* <li className="btn--white">
             <Link to="/wishlist">
               <b>Wish list</b>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>
