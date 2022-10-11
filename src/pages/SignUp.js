@@ -1,4 +1,4 @@
-import NewSignUpForm from "../components/NewSignUpForm";
+import NewSignUpForm from "../components/authentication/NewSignUpForm";
 import Utils from "../helper/Utils";
 
 function SignUp() {
@@ -11,12 +11,12 @@ function SignUp() {
         console.log(res);
 
         // Not successful - display an error message
-        if (res.status == 500) {
+        if (res.status === 500) {
           console.log("error");
         }
 
         // user created successfully,
-        else if (res.status == 201) {
+        else if (res.status === 201) {
           console.log("success");
           // redirect to login page
         }

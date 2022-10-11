@@ -1,6 +1,7 @@
-import { useRef } from "react";
-import Card from "./Card";
+import { useRef, useState } from "react";
+import Card from "../Card";
 import classes from "./NewSignUpForm.module.css";
+import { Link } from "react-router-dom";
 
 function NewSignUpForm(props) {
   const usernameInputRef = useRef();
@@ -8,7 +9,10 @@ function NewSignUpForm(props) {
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   function submitHandler(event) {
+    // console.log("clicked sign up");
     event.preventDefault();
 
     //   reading what the user entered
@@ -18,6 +22,11 @@ function NewSignUpForm(props) {
     const enteredConfirmPassword = confirmPasswordInputRef.current.value;
 
     // Check whether the password matches
+
+    if (enteredPassword !== enteredConfirmPassword) {
+      console.log("password mismatch");
+      return setErrorMessage("Passwords do not match");
+    }
 
     // if they dont, show an error
 
@@ -31,10 +40,12 @@ function NewSignUpForm(props) {
     };
 
     props.onAddUser(userData);
+
+    //redirect to login page
   }
 
   return (
-    <Card>
+    <Card className={classes.formContainer}>
       <form className={classes.form} onSubmit={submitHandler}>
         <div className={classes.control}>
           <label htmlFor="username">Username</label>
@@ -48,13 +59,18 @@ function NewSignUpForm(props) {
 
         <div className={classes.control}>
           <label htmlFor="password">Password</label>
-          <input type="text" required id="password" ref={passwordInputRef} />
+          <input
+            type="password"
+            required
+            id="password"
+            ref={passwordInputRef}
+          />
         </div>
 
         <div className={classes.control}>
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
-            type="text"
+            type="password"
             required
             id="confirmPassword"
             ref={confirmPasswordInputRef}
@@ -62,9 +78,14 @@ function NewSignUpForm(props) {
         </div>
 
         <div className={classes.actions}>
+          <div className={classes.errortext}>{errorMessage}</div>
           <button>Sign Up</button>
         </div>
       </form>
+      <div className={classes.centralise}>
+        Already have an account?
+        <Link to="/login">Login</Link>
+      </div>
     </Card>
   );
 }
