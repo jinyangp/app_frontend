@@ -13,8 +13,6 @@ function MainNavigation() {
             <h2>PriceFix </h2>
           </Link>
 
-          <SearchBar />
-
           <li className="btn--black">
             <Link to="/login">
               <b>Login</b>
@@ -27,11 +25,13 @@ function MainNavigation() {
             </Link>
           </li>
 
-          {/* <li className="btn--white">
+          <li className="btn--white">
             <Link to="/wishlist">
               <b>Wish list</b>
             </Link>
-          </li> */}
+          </li>
+
+          <SearchBar placeholder="Search" />
         </ul>
       </nav>
     </header>

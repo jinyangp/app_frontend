@@ -1,4 +1,4 @@
-import { BsSearch } from "react-icons/bs";
+import SearchIcon from "@mui/icons-material/Search";
 import classes from "./SearchBar.module.css";
 
 function SearchBar({ placeholder, data }) {
@@ -8,7 +8,7 @@ function SearchBar({ placeholder, data }) {
         <div className="searchInputs">
           <input type="text" placeholder={placeholder} />
           <div className="searchIcon">
-            <BsSearch />
+            <SearchIcon />
           </div>
         </div>
         <div className="dataResult"></div>

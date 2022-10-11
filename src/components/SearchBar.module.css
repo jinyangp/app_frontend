@@ -20,7 +20,7 @@
   width: 50px;
   background-color: white;
   display: grid;
-  place-items: center;
+  place-items: right;
 }
 
 input:focus {
