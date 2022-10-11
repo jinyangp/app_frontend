@@ -6,7 +6,9 @@ function Login() {
     <section>
       <h3>PriceFix</h3>
       <h4>Welcome Back, it's good to see you again!</h4>
-      <LogInForm onLogIn={onLogInHandler} />
+      <div>
+        <LogInForm onLogIn={onLogInHandler} />
+      </div>
     </section>
   );
 }

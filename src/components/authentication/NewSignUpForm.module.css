@@ -8,7 +8,8 @@
 }
 
 .formContainer {
-  max-width: 400px;
+  height: 500px;
+  width: 500px;
   border: 1px solid #454552;
 }
 

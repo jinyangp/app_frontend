@@ -25,7 +25,8 @@ function NewSignUpForm(props) {
 
     if (enteredPassword !== enteredConfirmPassword) {
       console.log("password mismatch");
-      return setErrorMessage("Passwords do not match");
+      setErrorMessage("Passwords do not match");
+      return;
     }
 
     // if they dont, show an error
@@ -45,48 +46,50 @@ function NewSignUpForm(props) {
   }
 
   return (
-    <Card className={classes.formContainer}>
-      <form className={classes.form} onSubmit={submitHandler}>
-        <div className={classes.control}>
-          <label htmlFor="username">Username</label>
-          <input type="text" required id="username" ref={usernameInputRef} />
-        </div>
+    <div className={classes.formContainer}>
+      <Card>
+        <form className={classes.form} onSubmit={submitHandler}>
+          <div className={classes.control}>
+            <label htmlFor="username">Username</label>
+            <input type="text" required id="username" ref={usernameInputRef} />
+          </div>
 
-        <div className={classes.control}>
-          <label htmlFor="email">Email</label>
-          <input type="text" required id="email" ref={emailInputRef} />
-        </div>
+          <div className={classes.control}>
+            <label htmlFor="email">Email</label>
+            <input type="text" required id="email" ref={emailInputRef} />
+          </div>
 
-        <div className={classes.control}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            required
-            id="password"
-            ref={passwordInputRef}
-          />
-        </div>
+          <div className={classes.control}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              required
+              id="password"
+              ref={passwordInputRef}
+            />
+          </div>
 
-        <div className={classes.control}>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            required
-            id="confirmPassword"
-            ref={confirmPasswordInputRef}
-          />
-        </div>
+          <div className={classes.control}>
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              required
+              id="confirmPassword"
+              ref={confirmPasswordInputRef}
+            />
+          </div>
 
-        <div className={classes.actions}>
-          <div className={classes.errortext}>{errorMessage}</div>
-          <button>Sign Up</button>
+          <div className={classes.actions}>
+            <div className={classes.errortext}>{errorMessage}</div>
+            <button>Sign Up</button>
+          </div>
+        </form>
+        <div className={classes.centralise}>
+          Already have an account?
+          <Link to="/login">Login</Link>
         </div>
-      </form>
-      <div className={classes.centralise}>
-        Already have an account?
-        <Link to="/login">Login</Link>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 }
 
