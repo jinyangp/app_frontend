@@ -24,4 +24,8 @@ Utils.postApi = async function (endPoint, parameters = {}) {
   }
 };
 
+// Utils.getApi = function (endPoint) {
+//   const url = baseUrl + endPoint;
+// };
+
 export default Utils;

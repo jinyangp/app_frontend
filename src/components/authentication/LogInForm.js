@@ -17,44 +17,48 @@ function LogInForm(props) {
     const enteredUsernameEmail = usernameEmailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
+    console.log(enteredUsernameEmail);
+    console.log(enteredPassword);
     //query the DB
 
     //redirect to main page
   }
 
   return (
-    <Card>
-      <form className={classes.form} onSubmit={submitHandler}>
-        <div className={classes.control}>
-          <label htmlFor="username">Username or Email</label>
-          <input
-            type="text"
-            required
-            id="username"
-            ref={usernameEmailInputRef}
-          />
-        </div>
+    <div className={classes.formContainer}>
+      <Card>
+        <form className={classes.form} onSubmit={submitHandler}>
+          <div className={classes.control}>
+            <label htmlFor="username">Username or Email</label>
+            <input
+              type="text"
+              required
+              id="username"
+              ref={usernameEmailInputRef}
+            />
+          </div>
 
-        <div className={classes.control}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            required
-            id="password"
-            ref={passwordInputRef}
-          />
-        </div>
+          <div className={classes.control}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              required
+              id="password"
+              ref={passwordInputRef}
+            />
+          </div>
 
-        <div className={classes.actions}>
-          {/* <div className={classes.errortext}>{errorMessage}</div> */}
-          <button>Login</button>
+          <div className={classes.actions}>
+            {/* <div className={classes.errortext}>{errorMessage}</div> */}
+            <button>Login</button>
+          </div>
+        </form>
+        <div className={classes.centralise}>
+          Dont have an account?
+          <Link to="/sign-up">Sign Up</Link>
         </div>
-      </form>
-      <div className={classes.centralise}>
-        Dont have an account?
-        <Link to="/sign-up">Sign Up</Link>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 }
 

@@ -22,16 +22,12 @@ function NewSignUpForm(props) {
     const enteredConfirmPassword = confirmPasswordInputRef.current.value;
 
     // Check whether the password matches
-
+    // if they dont, show an error
     if (enteredPassword !== enteredConfirmPassword) {
       console.log("password mismatch");
       setErrorMessage("Passwords do not match");
       return;
     }
-
-    // if they dont, show an error
-
-    // If match, then proceed on to make api request
 
     //   creating the user object that the user entered
     const userData = {
@@ -41,8 +37,6 @@ function NewSignUpForm(props) {
     };
 
     props.onAddUser(userData);
-
-    //redirect to login page
   }
 
   return (
