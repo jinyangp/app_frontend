@@ -4,14 +4,20 @@ import classes from "./SearchBar.module.css";
 function SearchBar({ placeholder, data }) {
   return (
     <section>
-      <div className="search">
-        <div className="searchInputs">
-          <input type="text" placeholder={placeholder} />
-          <div className="searchIcon">
-            <SearchIcon />
+      <div className={classes.searchbarContainer}>
+        <div className={classes.filterContainer}>
+          <p>All</p>
+        </div>
+        <div className={classes.textInputContainer}>
+          <input
+            className={classes.textInput}
+            type="text"
+            placeholder={placeholder}
+          />
+          <div className={classes.searchIconContainer}>
+            <SearchIcon style={{ color: "white" }} />
           </div>
         </div>
-        <div className="dataResult"></div>
       </div>
     </section>
   );

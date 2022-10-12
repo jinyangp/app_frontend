@@ -8,31 +8,31 @@ function MainNavigation() {
     <header className={classes.header}>
       {/* <div></div> */}
       <nav>
-        <ul>
-          <Link to="/">
-            <h2>PriceFix </h2>
-          </Link>
-
-          <li className="btn--black">
-            <Link to="/login">
-              <b>Login</b>
+        <div className={classes.navContainer}>
+          <div className={classes.titleContainer}>
+            <Link to="/">
+              <h1>PriceFix</h1>
             </Link>
-          </li>
+          </div>
 
-          <li className="btn--white">
-            <Link to="/sign-up">
-              <b>Sign Up</b>
-            </Link>
-          </li>
+          <div className={classes.searchBarContainer}>
+            <SearchBar placeholder="Search" />
+          </div>
 
-          <li className="btn--white">
-            <Link to="/wishlist">
-              <b>Wish list</b>
-            </Link>
-          </li>
+          <ul className={classes.ulcontainer}>
+            <li className="btn--black">
+              <Link to="/login">
+                <b>Login</b>
+              </Link>
+            </li>
 
-          <SearchBar placeholder="Search" />
-        </ul>
+            <li className="btn--white">
+              <Link to="/sign-up">
+                <b>Sign Up</b>
+              </Link>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
   );

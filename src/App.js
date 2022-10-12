@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        {/* <Route path="/wishlist" element={<Wishlist />} /> */}
       </Routes>
     </div>
   );
