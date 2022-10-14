@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import SearchBar from "./SearchBar";
-// import LargeBold from "./texts/LargeBold";
+import Categories from "./Categories/Categories";
 
 function MainNavigation() {
   return (
@@ -28,7 +28,7 @@ function MainNavigation() {
 
             <li className="btn--white">
               <Link to="/sign-up">
-                <b>Sign Up</b>
+                <b>SignUp</b>
               </Link>
             </li>
           </ul>
