@@ -1,25 +1,32 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Card from "../Card";
 import classes from "./LogInForm.module.css";
 import { Link } from "react-router-dom";
+import { Spin } from "antd";
+import "antd/es/spin/style/css";
 
 function LogInForm(props) {
   const usernameEmailInputRef = useRef();
   const passwordInputRef = useRef();
-
-  //   const [errorMessage, setErrorMessage] = useState("");
 
   function submitHandler(event) {
     console.log("clicked log in");
     event.preventDefault();
 
     //   reading what the user entered
-    const enteredUsernameEmail = usernameEmailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
+    const userNameOrEmail = usernameEmailInputRef.current.value;
+    const userPassword = passwordInputRef.current.value;
 
-    console.log(enteredUsernameEmail);
-    console.log(enteredPassword);
+    // console.log(userNameOrEmail);
+    // console.log(userPassword);
+
     //query the DB
+    const logInData = {
+      userNameOrEmail: userNameOrEmail,
+      userPassword: userPassword,
+    };
+
+    props.onLogIn(logInData);
 
     //redirect to main page
   }
@@ -49,8 +56,18 @@ function LogInForm(props) {
           </div>
 
           <div className={classes.actions}>
-            {/* <div className={classes.errortext}>{errorMessage}</div> */}
-            <button>Login</button>
+            {props.errorMsg ? (
+              <div className={classes.errortext}>{props.errorMsg}</div>
+            ) : (
+              <div></div>
+            )}
+            {props.isLoading ? (
+              <div className={classes.spinCentred}>
+                <Spin size="default" spinning={props.isLoading} />
+              </div>
+            ) : (
+              <button>Login</button>
+            )}
           </div>
         </form>
         <div className={classes.centralise}>
