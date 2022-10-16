@@ -19,6 +19,9 @@ const categories = [
 ];
 
 const Categories = () => {
+  function CategoryHandler(data) {
+    fetch("link", { method: "POST", body: JSON.stringify(data) });
+  }
   return (
     <main>
       <Grid container justify="center" spacing={4}>
