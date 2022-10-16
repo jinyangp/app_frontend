@@ -17,9 +17,6 @@ function LogInForm(props) {
     const userNameOrEmail = usernameEmailInputRef.current.value;
     const userPassword = passwordInputRef.current.value;
 
-    // console.log(userNameOrEmail);
-    // console.log(userPassword);
-
     //query the DB
     const logInData = {
       userNameOrEmail: userNameOrEmail,
@@ -56,17 +53,17 @@ function LogInForm(props) {
           </div>
 
           <div className={classes.actions}>
-            {props.errorMsg ? (
-              <div className={classes.errortext}>{props.errorMsg}</div>
-            ) : (
-              <div></div>
-            )}
             {props.isLoading ? (
               <div className={classes.spinCentred}>
                 <Spin size="default" spinning={props.isLoading} />
               </div>
             ) : (
               <button>Login</button>
+            )}
+            {props.errorMsg ? (
+              <div className={classes.errortext}>{props.errorMsg}</div>
+            ) : (
+              <div></div>
             )}
           </div>
         </form>

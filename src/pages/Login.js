@@ -10,7 +10,7 @@ function Login() {
 
   const onLogInHandler = (logInData) => {
     setIsLoading(true);
-
+    setErrorMessage("");
     // Receive my user data from argument userData
     // Make an API request
     Utils.getApi("/users/login", logInData)
@@ -20,6 +20,15 @@ function Login() {
         // user log in successfully
         if (res.status === 200) {
           console.log("successful log in");
+
+          // store user in local storage
+          localStorage.setItem("userId", JSON.stringify(res.data.userId));
+          localStorage.setItem("userName", JSON.stringify(res.data.userName));
+          localStorage.setItem(
+            "userImage",
+            JSON.stringify(res.data.userImageUrl)
+          );
+
           // redirect to Home page
           navigate("/");
 
