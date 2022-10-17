@@ -1,4 +1,4 @@
-import NewSignUpForm from "../components/NewSignUpForm";
+import NewSignUpForm from "../authentication/NewSignUpForm";
 
 function SignUp() {
   return (
