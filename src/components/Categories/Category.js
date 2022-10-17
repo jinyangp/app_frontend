@@ -1,7 +1,6 @@
-import { ClassNames } from "@emotion/react";
-import { ProductionQuantityLimits } from "@mui/icons-material";
+import { AddShoppingCart } from "@mui/icons-material";
 import React from "react";
-import Categories from "../Categories";
+
 import {
   Card,
   CardMedia,
@@ -17,28 +16,22 @@ const Category = ({ category }) => {
   const classes = useStyles();
   return (
     <button>
-      <Card className={ClassNames.root}>
+      <Card className={classes.root}>
         <CardMedia
           className={classes.media}
           image={category.catImageurl}
           title={category.catName}
         />
-        <h1>{category.catName}</h1>
         <CardContent>
           <div className={classes.CardContent}>
             <Typography variant="h5" gutterBottom>
-              {category.type}
+              {category.catName}
             </Typography>
-            <Typography variant="h5">{category.Amount}</Typography>
           </div>
           <Typography variant="body2" color="textSecondary">
-            {category.description}
+            {category.catProductCount} products
           </Typography>
         </CardContent>
-        <CardActions
-          disableSpacing
-          className={classes.cardActions}
-        ></CardActions>
       </Card>
     </button>
   );

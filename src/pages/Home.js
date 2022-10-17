@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import MainNavigation from "../components/MainNavigation";
 import { Grid } from "@material-ui/core";
-import Category from "../components/Categories/Category/Category";
+import Category from "../components/Categories/Category";
 import Utils from "../helper/Utils";
+import { useNavigate } from "react-router-dom";
 
 function Home(props) {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -12,9 +14,6 @@ function Home(props) {
     Utils.getApi("/products/getCategories")
       .then((res) => {
         setIsLoading(true);
-
-        // delete later
-        // console.log(res.data);
 
         for (let cat of res.data) {
           setCategories((prevCats) => [
@@ -45,21 +44,28 @@ function Home(props) {
     console.log(categories);
   }, [isLoading]);
 
-  // <Grid container justify="center" spacing={4}>
-  //       {props.categories.map((category) => (
-  //         <Grid item key={props.categories.type} xs={12} sm={6} md={4} lg={3}>
-  //           <Category category={category} />
-  //         </Grid>
-  //       ))}
+  // return (
+  //   <div>
+  //     <MainNavigation />
+  //     <Grid container justifyContent="center" spacing={4}>
+  //       {categories.map((category, index) => {
+  //         return <Category category={category} key={index} />;
+  //         console.log(categories);
+  //       })}
   //     </Grid>
+  //   </div>
+  // );
 
   return (
     <div>
       <MainNavigation />
-      <div>Home Page</div>
-      {categories.map((category, index) => {
-        return <Category category={category} key={index} />;
-      })}
+      <Grid container justifyContent="center" spacing={4}>
+        {categories.map((category, index) => (
+          <Grid item key={category.catName} xs={12} sm={6} md={4} lg={4}>
+            <Category category={category} key={index} />;
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }
