@@ -20,9 +20,10 @@ const Category = ({ category }) => {
       <Card className={ClassNames.root}>
         <CardMedia
           className={classes.media}
-          image={category.image}
-          title={category.type}
+          image={category.catImageurl}
+          title={category.catName}
         />
+        <h1>{category.catName}</h1>
         <CardContent>
           <div className={classes.CardContent}>
             <Typography variant="h5" gutterBottom>

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import SearchBar from "./SearchBar";
-import Categories from "./Categories/Categories";
 
 function MainNavigation() {
   return (
