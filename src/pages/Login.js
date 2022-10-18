@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import LogInForm from "../components/authentication/LogInForm";
 import Utils from "../helper/Utils";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../components/UserContext";
 
 function Login() {
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,6 +31,16 @@ function Login() {
             "userImage",
             JSON.stringify(res.data.userImageUrl)
           );
+
+          // create a user object and use it as a context so other classes can access it
+          const loginObj = {
+            userId: res.data.userId,
+            userName: res.data.userName,
+            userImage: res.data.userImageUrl,
+          };
+
+          //context setuser
+          setUser(loginObj);
 
           // redirect to Home page
           navigate("/");

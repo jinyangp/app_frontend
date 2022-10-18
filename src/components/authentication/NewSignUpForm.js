@@ -23,19 +23,6 @@ function NewSignUpForm(props) {
     const enteredPassword = passwordInputRef.current.value;
     const enteredConfirmPassword = confirmPasswordInputRef.current.value;
 
-    // Check whether the password matches
-    // if they dont, show an error
-
-    // if (enteredPassword !== enteredConfirmPassword) {
-    //   // console.log("password mismatch");
-    //   setErrorMessage("Passwords do not match");
-    //   return;
-    // }
-
-    // if (enteredPassword === enteredConfirmPassword) {
-    //   setErrorMessage("");
-    // }
-
     //   creating the user object that the user entered
     const userData = {
       userName: enteredUsername,
