@@ -10,6 +10,15 @@ function Home(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
+  const onClickCatHandler = (catId) => {
+    // Redirect to new page with category id as a query parameter
+    navigate(`/category/${catId}`, {
+      state: {
+        catId: catId,
+      },
+    });
+  };
+
   const getCategories = () => {
     Utils.getApi("/products/getCategories")
       .then((res) => {
@@ -19,6 +28,7 @@ function Home(props) {
           setCategories((prevCats) => [
             ...prevCats,
             {
+              catId: cat.category_id,
               catName: cat.category_name,
               catImageurl:
                 "http://localhost:8080/images/" + cat.category_imageurl,
@@ -62,7 +72,13 @@ function Home(props) {
       <Grid container justifyContent="center" spacing={4}>
         {categories.map((category, index) => (
           <Grid item key={category.catName} xs={12} sm={6} md={4} lg={4}>
-            <Category category={category} key={index} />;
+            <Category
+              onClickCatHandler={() => {
+                onClickCatHandler(category.catId);
+              }}
+              category={category}
+              key={index}
+            />
           </Grid>
         ))}
       </Grid>
