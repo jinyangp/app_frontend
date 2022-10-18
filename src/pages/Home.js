@@ -79,7 +79,6 @@ function Home(props) {
               category={category}
               key={index}
             />
-            ;
           </Grid>
         ))}
       </Grid>
