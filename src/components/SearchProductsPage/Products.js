@@ -1,34 +1,27 @@
 import React from "react";
 
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  IconButton,
-} from "@material-ui/core";
+import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 
-import useStyles from "./styles";
+import useStyles from "./ProductsStyle";
 
-const Category = ({ category }) => {
+const Products = ({ product }) => {
   const classes = useStyles();
   return (
     <button>
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
-          image={category.catImageurl}
-          title={category.catName}
+          image={product.productImageurl}
+          title={product.productName}
         />
         <CardContent>
           <div className={classes.CardContent}>
             <Typography variant="h5" gutterBottom>
-              {category.catName}
+              {product.productName}
             </Typography>
           </div>
           <Typography variant="body2" color="textSecondary">
-            {category.catProductCount} products
+            ${product.productPrice}
           </Typography>
         </CardContent>
       </Card>
@@ -36,4 +29,4 @@ const Category = ({ category }) => {
   );
 };
 
-export default Category;
+export default Products;
