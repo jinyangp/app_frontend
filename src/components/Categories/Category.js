@@ -11,10 +11,14 @@ import {
 
 import useStyles from "./styles";
 
-const Category = ({ category }) => {
+const Category = ({ category, onClickCatHandler }) => {
   const classes = useStyles();
   return (
-    <button>
+    <button
+      onClick={() => {
+        onClickCatHandler(category.catId);
+      }}
+    >
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}

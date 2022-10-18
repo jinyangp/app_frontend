@@ -3,18 +3,20 @@ import MainNavigation from "../components/MainNavigation";
 import { Grid } from "@material-ui/core";
 import Products from "../components/SearchProductsPage/Products";
 import Utils from "../helper/Utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function SearchProducts(props) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
+  const { state } = useLocation();
+
   const getProducts = () => {
-    Utils.getApi("/products/getItemsByCategory")
+    Utils.getApi("/products/getItemsByCategory", { cat: state.catId })
       .then((res) => {
         setIsLoading(true);
-
+        console.log(res);
         for (let pro of res.data) {
           setProducts((prevPros) => [
             ...prevPros,
