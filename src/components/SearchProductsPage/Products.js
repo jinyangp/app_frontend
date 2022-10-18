@@ -1,5 +1,5 @@
 import React from "react";
-
+import AddToWishListButton from "../buttons/AddToWishlistButton";
 import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 
 import useStyles from "./ProductsStyle";
@@ -24,6 +24,9 @@ const Products = ({ product }) => {
             ${product.productPrice}
           </Typography>
         </CardContent>
+        <button>
+          <AddToWishListButton />
+        </button>
       </Card>
     </button>
   );
