@@ -1,23 +1,24 @@
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import SearchBar from "./SearchBar";
-import { useContext } from "react";
-import { UserContext } from "./UserContext";
 
 function MainNavigation() {
-  const { user } = useContext(UserContext);
-
-  if (user === null) {
-    return (
-      <header className={classes.header}>
-        <nav>
-          <ul>
+  return (
+    <header className={classes.header}>
+      {/* <div></div> */}
+      <nav>
+        <div className={classes.navContainer}>
+          <div className={classes.titleContainer}>
             <Link to="/">
-              <h2>PriceFix </h2>
+              <h1>PriceFix</h1>
             </Link>
+          </div>
 
-            <SearchBar />
+          <div className={classes.searchBarContainer}>
+            <SearchBar placeholder="Search" />
+          </div>
 
+          <ul className={classes.ulcontainer}>
             <li className="btn--black">
               <Link to="/login">
                 <b>Login</b>
@@ -26,38 +27,14 @@ function MainNavigation() {
 
             <li className="btn--white">
               <Link to="/sign-up">
-                <b>Sign Up</b>
+                <b>SignUp</b>
               </Link>
             </li>
           </ul>
-        </nav>
-      </header>
-    );
-  } else {
-    return (
-      <header className={classes.header}>
-        <nav>
-          <ul>
-            <Link to="/">
-              <h2>PriceFix </h2>
-            </Link>
-
-            <SearchBar />
-
-            <li className="btn--black">
-              <Link to="/wishlist">
-                <b>Wish list</b>
-              </Link>
-            </li>
-
-            <li className="btn--black">
-              <b>{user.userName}</b>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    );
-  }
+        </div>
+      </nav>
+    </header>
+  );
 }
 
 export default MainNavigation;

@@ -8,7 +8,6 @@ const onErrorHandler = (err) => {
   if (err.response.status === 403 || err.response.status === 401) {
     return { message: "Unauthenticated" };
   }
-
   // unknown error by server
   if (err.response.status === 500) {
     return { message: "Unknown error" };
