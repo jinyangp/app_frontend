@@ -10,7 +10,7 @@ const onErrorHandler = (err) => {
   }
 
   if (err.response.status === 404) {
-    return { message: "Unauthenticated" };
+    return { message: "Not Found" };
   }
   // unknown error by server
   if (err.response.status === 500) {
