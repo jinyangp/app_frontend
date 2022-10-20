@@ -16,11 +16,11 @@ function SearchProducts(props) {
     Utils.getApi("/products/getItemsByCategory", { cat: state.catId })
       .then((res) => {
         setIsLoading(true);
-        console.log(res);
         for (let pro of res.data) {
           setProducts((prevPros) => [
             ...prevPros,
             {
+              productId: pro.product_id,
               productName: pro.product_name,
               productImageurl:
                 "http://localhost:8080/images/" + pro.product_imageurl,
@@ -50,8 +50,13 @@ function SearchProducts(props) {
       <MainNavigation />
       <Grid container justifyContent="center" spacing={4}>
         {products.map((product, index) => (
+<<<<<<< HEAD
           <Grid item key={product.productName} xs={12} sm={6} md={4} lg={4}>
             <Products product={product} key={index} />
+=======
+          <Grid item key={product.productId} xs={12} sm={6} md={4} lg={4}>
+            <Products product={product} key={index} />;
+>>>>>>> origin
           </Grid>
         ))}
       </Grid>

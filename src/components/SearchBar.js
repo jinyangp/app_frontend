@@ -6,7 +6,6 @@ function SearchBar({ placeholder, data }) {
   return (
     <section>
       <div className={classes.searchbarContainer}>
-        <div className={classes.filterContainer}>{/* <p>All</p> */}</div>
         <div className={classes.textInputContainer}>
           <input
             className={classes.textInput}
