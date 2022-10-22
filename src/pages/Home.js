@@ -49,11 +49,6 @@ function Home(props) {
     getCategories();
   }, []);
 
-  // Delete later
-  useEffect(() => {
-    console.log(categories);
-  }, [isLoading]);
-
   // return (
   //   <div>
   //     <MainNavigation />
@@ -67,11 +62,11 @@ function Home(props) {
   // );
 
   return (
-    <div>
+    <div className="default-page-margin">
       <MainNavigation />
-      <Grid container justifyContent="center" spacing={4}>
+      <Grid container spacing={3}>
         {categories.map((category, index) => (
-          <Grid item key={category.catName} xs={12} sm={6} md={4} lg={4}>
+          <Grid item key={category.catName} xs={6} lg={4} xl={3}>
             <Category
               onClickCatHandler={() => {
                 onClickCatHandler(category.catId);

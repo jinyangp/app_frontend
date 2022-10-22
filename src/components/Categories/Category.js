@@ -1,43 +1,47 @@
 import React from "react";
 
 import {
-  Card,
+  Card as MaterialUICard,
   CardMedia,
   CardContent,
-  CardActions,
-  Typography,
-  IconButton,
 } from "@material-ui/core";
 
 import useStyles from "./styles";
+import MediumRegular from "../texts/MediumRegular";
+import SmallBold from "../texts/SmallBold";
 
 const Category = ({ category, onClickCatHandler }) => {
   const classes = useStyles();
   return (
-    <button
+    <MaterialUICard
+      className={classes.root}
       onClick={() => {
         onClickCatHandler(category.catId);
       }}
     >
-      <Card className={classes.root}>
-        <CardMedia
-          className={classes.media}
-          image={category.catImageurl}
-          title={category.catName}
-        />
-        <CardContent>
-          <div className={classes.CardContent}>
-            <Typography variant="h5" gutterBottom>
-              {category.catName}
-            </Typography>
-          </div>
-          <Typography variant="body2" color="textSecondary">
-            {category.catProductCount} products
-          </Typography>
-        </CardContent>
-      </Card>
-    </button>
+      <CardMedia
+        className={classes.media}
+        image={category.catImageurl}
+        title={category.catName}
+      />
+      <CardContent className={classes.cardContent}>
+        <MediumRegular text={category.catName} />
+        <div className={classes.productCountContainer}>
+          <SmallBold
+            text={`${category.catProductCount} products`}
+            textStyles={classes.productCountText}
+          />
+        </div>
+      </CardContent>
+    </MaterialUICard>
   );
 };
 
 export default Category;
+
+// <Typography variant="h5" gutterBottom>
+//   {category.catName}
+// </Typography>
+// <Typography variant="body2" color="textSecondary">
+//   {category.catProductCount} products
+// </Typography>

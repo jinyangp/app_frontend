@@ -4,6 +4,8 @@ import SearchBar from "./SearchBar";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
+import LargeBold from "./texts/LargeBold";
+
 function MainNavigation() {
   const { user } = useContext(UserContext);
 
@@ -14,7 +16,7 @@ function MainNavigation() {
           <div className={classes.navContainer}>
             <div className={classes.titleContainer}>
               <Link to="/">
-                <h1>PriceFix</h1>
+                <LargeBold text="PriceFix" />
               </Link>
             </div>
 
@@ -46,7 +48,7 @@ function MainNavigation() {
           <div className={classes.navContainer}>
             <div className={classes.titleContainer}>
               <Link to="/">
-                <h1>PriceFix</h1>
+                <LargeBold text="PriceFix" />
               </Link>
             </div>
 

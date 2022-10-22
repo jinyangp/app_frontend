@@ -99,17 +99,37 @@ h4 {
 }
 
 /* font sizes */
+.text-small-bold {
+  font-size: 12px;
+  font-weight: bold;
+}
+
 .text-small-regular {
-  font-size: 12;
+  font-size: 12px;
   font-weight: normal;
 }
 
 .text-normal-regular {
-  font-size: 16;
+  font-size: 16px;
   font-weight: normal;
 }
 
+.text-medium-regular {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.text-medium-bold {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .text-large-bold {
-  font-size: 32;
-  font-weight: bolder;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.default-page-margin {
+  margin-left: 5%;
+  margin-right: 5%;
 }

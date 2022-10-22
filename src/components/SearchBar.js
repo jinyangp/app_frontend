@@ -13,9 +13,12 @@ function SearchBar({ placeholder, data }) {
             placeholder={placeholder}
           />
           <div className={classes.searchIconContainer}>
-            <button>
-              <SearchIcon style={{ color: "white" }} />
-            </button>
+            <SearchIcon
+              style={{ color: "white" }}
+              onClick={() => {
+                console.log("Searching");
+              }}
+            />
           </div>
         </div>
       </div>
