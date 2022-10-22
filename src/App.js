@@ -4,25 +4,21 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SearchProducts from "./pages/SearchProducts";
 import Wishlist from "./pages/Wishlist";
-import { UserContext } from "./components/UserContext";
-import { useState } from "react";
+import Profile from "./pages/Profile";
 
 function App() {
-  const [user, setUser] = useState(null);
-
   return (
     //initialising the user as null as he is not logged in
-    <UserContext.Provider value={{ user, setUser }}>
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/category/:catId" element={<SearchProducts />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-        </Routes>
-      </div>
-    </UserContext.Provider>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/category/:catId" element={<SearchProducts />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </div>
   );
 }
 

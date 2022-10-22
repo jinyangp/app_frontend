@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import SearchBar from "./SearchBar";
-import { useContext } from "react";
-import { UserContext } from "./UserContext";
 
 import LargeBold from "./texts/LargeBold";
 
 function MainNavigation() {
-  const { user } = useContext(UserContext);
-
-  if (user === null) {
+  if (localStorage.length > 0) {
     return (
       <header className={classes.header}>
         <nav>
@@ -26,14 +22,14 @@ function MainNavigation() {
 
             <ul className={classes.ulcontainer}>
               <li className="btn--black">
-                <Link to="/login">
-                  <b>Login</b>
+                <Link to="/wishlist">
+                  <b>Wishlist</b>
                 </Link>
               </li>
 
               <li className="btn--white">
-                <Link to="/sign-up">
-                  <b>SignUp</b>
+                <Link to="/profile">
+                  <b>{localStorage.getItem("userName")}</b>
                 </Link>
               </li>
             </ul>
@@ -58,8 +54,14 @@ function MainNavigation() {
 
             <ul className={classes.ulcontainer}>
               <li className="btn--black">
-                <Link to="/wishlist">
-                  <b>Wishlist</b>
+                <Link to="/login">
+                  <b>Login</b>
+                </Link>
+              </li>
+
+              <li className="btn--white">
+                <Link to="/sign-up">
+                  <b>SignUp</b>
                 </Link>
               </li>
             </ul>
