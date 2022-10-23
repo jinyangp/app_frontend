@@ -28,8 +28,21 @@ export default makeStyles(() => ({
     display: "flex",
     justifyContent: "space-between",
   },
+
   buttonContainer: {
     borderColor: "transparent",
     backgroundColor: "transparent",
+  },
+
+  platformContainer: {
+    backgroundColor: "#454552",
+    height: 30,
+    width: 80,
+    borderRadius: 5,
+    textAlign: "center",
+  },
+
+  platformText: {
+    color: "white",
   },
 }));

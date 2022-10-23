@@ -15,6 +15,7 @@ function SearchProducts(props) {
   const getProducts = () => {
     Utils.getApi("/products/getItemsByCategory", { cat: state.catId })
       .then((res) => {
+        // console.log(res);
         setIsLoading(true);
         for (let pro of res.data) {
           setProducts((prevPros) => [
@@ -25,6 +26,8 @@ function SearchProducts(props) {
               productImageurl:
                 "http://localhost:8080/images/" + pro.product_imageurl,
               productPrice: pro.price_price,
+              productDescription: pro.product_desc,
+              productPlatform: pro.product_platform,
             },
           ]);
         }

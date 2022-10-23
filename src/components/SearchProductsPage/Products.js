@@ -4,6 +4,7 @@ import { Card, CardMedia, CardContent } from "@material-ui/core";
 
 import useStyles from "./ProductsStyle";
 import MediumRegular from "../texts/MediumRegular";
+import SmallBold from "../texts/SmallBold";
 
 const Products = ({ product }) => {
   const classes = useStyles();
@@ -31,17 +32,25 @@ const Products = ({ product }) => {
         />
         <CardContent className={classes.cardContent}>
           <MediumRegular text={product.productName} />
+          <div className={classes.platformContainer}>
+            <SmallBold
+              text={product.productPlatform}
+              textStyles={classes.platformText}
+            />
+          </div>
           <div>
             <b>${product.productPrice}</b>
           </div>
         </CardContent>
 
-        <button
-          className={classes.buttonContainer}
-          onClick={addToWishListHandler}
-        >
-          <AddToWishListButton />
-        </button>
+        <div>
+          <button
+            className={classes.buttonContainer}
+            onClick={addToWishListHandler}
+          >
+            <AddToWishListButton />
+          </button>
+        </div>
       </Card>
     </button>
   );
