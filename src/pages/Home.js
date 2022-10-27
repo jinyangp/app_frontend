@@ -64,6 +64,9 @@ function Home(props) {
   return (
     <div className="default-page-margin">
       <MainNavigation />
+      <h2>
+        <b>Categories</b>
+      </h2>
       <Grid container spacing={3}>
         {categories.map((category, index) => (
           <Grid item key={category.catName} xs={6} lg={4} xl={3}>
