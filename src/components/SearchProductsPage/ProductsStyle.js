@@ -42,6 +42,8 @@ export default makeStyles(() => ({
     height: 21,
     width: 80,
     borderRadius: 5,
+    // textAlign: "center",
+    // paddingTop: "2.5%",
   },
 
   platformText: {
