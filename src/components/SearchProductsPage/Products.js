@@ -6,12 +6,9 @@ import useStyles from "./ProductsStyle";
 import MediumRegular from "../texts/MediumRegular";
 import SmallBold from "../texts/SmallBold";
 
-const Products = ({ product }) => {
+const Products = ({ product, onClickItemHandler  }) => {
   const classes = useStyles();
-  function viewSpecificItemHandler(event) {
-    //redirects to specific item page
-    console.log("Clicked on specific item");
-  }
+
   function addToWishListHandler(event) {
     //add function here to add item to wishlist
     console.log("Clicked add to wishlist");
@@ -22,7 +19,7 @@ const Products = ({ product }) => {
   return (
     <button
       className={classes.buttonContainer}
-      onClick={viewSpecificItemHandler}
+      onClick={onClickItemHandler}
     >
       <Card className={classes.root}>
         <CardMedia

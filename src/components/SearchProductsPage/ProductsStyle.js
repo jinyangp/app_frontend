@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { findByLabelText } from "@testing-library/react";
 
 export default makeStyles(() => ({
   root: {
@@ -40,6 +41,7 @@ export default makeStyles(() => ({
     width: 80,
     borderRadius: 5,
     textAlign: "center",
+    
   },
 
   platformText: {
