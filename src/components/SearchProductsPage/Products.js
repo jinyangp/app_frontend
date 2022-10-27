@@ -4,11 +4,10 @@ import { Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 
 import useStyles from "./ProductsStyle";
 
-const Products = ({ product }) => {
+const Products = ({ product, onClickItemHandler  }) => {
   const classes = useStyles();
   return (
-    <button>
-      <Card className={classes.root}>
+      <Card className={classes.root} onClick={onClickItemHandler}>
         <CardMedia
           className={classes.media}
           image={product.productImageurl}
@@ -28,7 +27,6 @@ const Products = ({ product }) => {
           <AddToWishListButton />
         </button>
       </Card>
-    </button>
   );
 };
 

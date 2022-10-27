@@ -13,6 +13,9 @@ function SearchProducts(props) {
   const { state } = useLocation();
 
   const getProducts = () => {
+    
+    setIsLoading(true);
+    
     Utils.getApi("/products/getItemsByCategory", { cat: state.catId })
       .then((res) => {
         setIsLoading(true);
@@ -45,13 +48,25 @@ function SearchProducts(props) {
     console.log(products);
   }, [isLoading]);
 
+  const onClickItemHandler = (productId) => {
+    // Redirect to new page with product id as a query parameter
+    navigate(`/item-details/${productId}`, {
+      state: {
+        productId: productId,
+      },
+    });
+  };
+
+
   return (
     <div>
       <MainNavigation />
       <Grid container justifyContent="center" spacing={4}>
         {products.map((product, index) => (
           <Grid item key={product.productId} xs={12} sm={6} md={4} lg={4}>
-            <Products product={product} key={index} />;
+            <Products product={product} key={index} onClickItemHandler={() => {
+              onClickItemHandler(product.productId)
+            }} />
           </Grid>
         ))}
       </Grid>

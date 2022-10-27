@@ -21,7 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/item-details" element={<ItemDetails/>}/>
+          <Route path="/item-details/:itemId" element={<ItemDetails/>}/>
         </Routes>
       </div>
     </UserContext.Provider>

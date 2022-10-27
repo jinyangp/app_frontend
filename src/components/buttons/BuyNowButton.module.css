@@ -1,0 +1,23 @@
+.btnContainer {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 180px;
+    height: 40px;
+    border: radius 10px;
+  }
+  
+  .iconContainer {
+    height: 100%;
+    width: 15%;
+    margin-right: 5px;
+  }
+  
+  .textContainer {
+    margin-left: 20px;
+    height: 100%;
+    width: 85%;
+  }
+  
