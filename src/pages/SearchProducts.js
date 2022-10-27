@@ -52,11 +52,11 @@ function SearchProducts(props) {
     <div className="default-page-margin">
       <MainNavigation />
       <h2>
-        <b>Insert category name here</b>
+        <b>{state.catName}</b>
       </h2>
-      <Grid container spacing={1}>
+      <Grid container spacing={3}>
         {products.map((product, index) => (
-          <Grid item key={product.productId} xs={12} sm={6} md={4} lg={4}>
+          <Grid item key={product.productId} xs={6} lg={4} xl={4}>
             <Products product={product} key={index} />
           </Grid>
         ))}

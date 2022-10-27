@@ -16,7 +16,7 @@ const Category = ({ category, onClickCatHandler }) => {
     <MaterialUICard
       className={classes.root}
       onClick={() => {
-        onClickCatHandler(category.catId);
+        onClickCatHandler(category.catId, category.catName);
       }}
     >
       <CardMedia
