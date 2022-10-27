@@ -10,11 +10,12 @@ function Home(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  const onClickCatHandler = (catId) => {
+  const onClickCatHandler = (catId, catName) => {
     // Redirect to new page with category id as a query parameter
     navigate(`/category/${catId}`, {
       state: {
         catId: catId,
+        catName: catName,
       },
     });
   };
@@ -72,7 +73,7 @@ function Home(props) {
           <Grid item key={category.catName} xs={6} lg={4} xl={3}>
             <Category
               onClickCatHandler={() => {
-                onClickCatHandler(category.catId);
+                onClickCatHandler(category.catId, category.catName);
               }}
               category={category}
               key={index}

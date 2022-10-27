@@ -43,14 +43,7 @@ const Products = ({ product }) => {
           </div>
         </CardContent>
 
-        <div>
-          <button
-            className={classes.buttonContainer}
-            onClick={addToWishListHandler}
-          >
-            <AddToWishListButton />
-          </button>
-        </div>
+        <AddToWishListButton onClickHandler={addToWishListHandler} />
       </Card>
     </button>
   );
