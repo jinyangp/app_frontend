@@ -35,8 +35,8 @@ const Products = ({ product }) => {
         <div className={classes.textContainer}>
           <div className={classes.alignLeft}>
             <MediumRegular text={product.productName} />
-            {/* <div>{product.productName}</div> */}
           </div>
+
           <div className={classes.platformContainer}>
             <SmallBold
               text={product.productPlatform}
@@ -44,9 +44,14 @@ const Products = ({ product }) => {
             />
           </div>
 
-          <div className={classes.priceContainer}>
+          {/* <div className={classes.priceContainer}>
             <b>${product.productPrice}</b>
+          </div> */}
+
+          <div className={classes.alignLeft}>
+            <MediumBold text={"$" + product.productPrice} />
           </div>
+
           <AddToWishListButton onClickHandler={addToWishListHandler} />
         </div>
         {/* <CardContent className={classes.cardContent}>
