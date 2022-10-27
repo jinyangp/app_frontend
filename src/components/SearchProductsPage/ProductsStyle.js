@@ -2,20 +2,23 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(() => ({
   root: {
-    width: 450,
-    height: 400,
+    width: 500,
+    height: 280,
     maxWidth: "100%",
     maxHeight: "100%",
     padding: 5,
     borderRadius: 10,
     backgroundColor: "white",
     boxShadow: "0px 2px 8px rgba(0,0,0,0.2)",
+    display: "flex",
+    // justifyContent: "space-between",
   },
   media: {
-    height: "60%",
+    height: "100%",
     width: "100%",
+
     // borderRadius: 40,
-    paddingTop: "56.25",
+    // paddingTop: "56.25",
   },
   cardActions: {
     display: "flex",
@@ -36,13 +39,25 @@ export default makeStyles(() => ({
 
   platformContainer: {
     backgroundColor: "#454552",
-    height: 30,
+    height: 21,
     width: 80,
     borderRadius: 5,
-    textAlign: "center",
   },
 
   platformText: {
     color: "white",
+  },
+
+  textContainer: {
+    padding: "5%",
+  },
+
+  alignLeft: {
+    textAlign: "left",
+  },
+
+  priceContainer: {
+    padding: "3%",
+    textAlign: "left",
   },
 }));

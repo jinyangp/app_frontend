@@ -5,6 +5,7 @@ import { Card, CardMedia, CardContent } from "@material-ui/core";
 import useStyles from "./ProductsStyle";
 import MediumRegular from "../texts/MediumRegular";
 import SmallBold from "../texts/SmallBold";
+import MediumBold from "../texts/MediumBold";
 
 const Products = ({ product }) => {
   const classes = useStyles();
@@ -19,6 +20,7 @@ const Products = ({ product }) => {
     //this prevents the parent button (the product button) from being pressed
     event.stopPropagation();
   }
+
   return (
     <button
       className={classes.buttonContainer}
@@ -30,7 +32,24 @@ const Products = ({ product }) => {
           image={product.productImageurl}
           title={product.productName}
         />
-        <CardContent className={classes.cardContent}>
+        <div className={classes.textContainer}>
+          <div className={classes.alignLeft}>
+            <MediumRegular text={product.productName} />
+            {/* <div>{product.productName}</div> */}
+          </div>
+          <div className={classes.platformContainer}>
+            <SmallBold
+              text={product.productPlatform}
+              textStyles={classes.platformText}
+            />
+          </div>
+
+          <div className={classes.priceContainer}>
+            <b>${product.productPrice}</b>
+          </div>
+          <AddToWishListButton onClickHandler={addToWishListHandler} />
+        </div>
+        {/* <CardContent className={classes.cardContent}>
           <MediumRegular text={product.productName} />
           <div className={classes.platformContainer}>
             <SmallBold
@@ -43,7 +62,7 @@ const Products = ({ product }) => {
           </div>
         </CardContent>
 
-        <AddToWishListButton onClickHandler={addToWishListHandler} />
+        <AddToWishListButton onClickHandler={addToWishListHandler} /> */}
       </Card>
     </button>
   );
