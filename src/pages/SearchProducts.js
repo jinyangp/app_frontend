@@ -56,7 +56,7 @@ function SearchProducts(props) {
       </h2>
       <Grid container spacing={3}>
         {products.map((product, index) => (
-          <Grid item key={product.productId} xs={6} lg={6} xl={6}>
+          <Grid item key={product.productId} xs={6} lg={4} xl={4}>
             <Products product={product} key={index} />
           </Grid>
         ))}

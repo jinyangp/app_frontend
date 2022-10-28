@@ -15,22 +15,22 @@ export default makeStyles(() => ({
   },
   media: {
     height: "100%",
-    width: "100%",
+    width: "45%",
 
     // borderRadius: 40,
     // paddingTop: "56.25",
   },
-  cardActions: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  cardContent: {
-    height: "25%",
-    textAlign: "center",
-    lineHeight: "200%",
-    display: "flex",
-    justifyContent: "space-between",
-  },
+  // cardActions: {
+  //   display: "flex",
+  //   justifyContent: "flex-end",
+  // },
+  // cardContent: {
+  //   height: "25%",
+  //   textAlign: "center",
+  //   lineHeight: "200%",
+  //   display: "flex",
+  //   justifyContent: "space-between",
+  // },
 
   buttonContainer: {
     borderColor: "transparent",
@@ -39,11 +39,9 @@ export default makeStyles(() => ({
 
   platformContainer: {
     backgroundColor: "#454552",
-    height: 21,
+    height: 25,
     width: 80,
     borderRadius: 5,
-    // textAlign: "center",
-    // paddingTop: "2.5%",
   },
 
   platformText: {
@@ -52,6 +50,7 @@ export default makeStyles(() => ({
 
   textContainer: {
     padding: "5%",
+    lineHeight: "180%",
   },
 
   alignLeft: {
@@ -59,7 +58,7 @@ export default makeStyles(() => ({
   },
 
   priceContainer: {
-    padding: "3%",
+    paddingTop: "5%",
     textAlign: "left",
   },
 }));
