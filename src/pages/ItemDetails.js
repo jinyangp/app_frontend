@@ -10,6 +10,8 @@ import ButtonBase from "@mui/material/ButtonBase";
 import AddToWishlistButton from "../components/buttons/AddToWishlistButton";
 import LargeBold from "../components/texts/LargeBold";
 import SmallBold from "../components/texts/SmallBold";
+import MediumBold from "../components/texts/MediumBold";
+import SmallRegular from "../components/texts/SmallRegular";
 import BuyNowButton from "../components/buttons/BuyNowButton";
 import useStyles from "../components/SearchProductsPage/ProductsStyle";
 
@@ -93,12 +95,14 @@ function ItemDetails(props) {
               >
                 <Grid item container xs={12} spacing={2}>
                   <Grid item>
-                    <Typography xs variant="h5" component="div" sx={{ pt: 2 }}>
-                      {product.productName}
+                    <Typography xs component="div" sx={{ pt: 2 }}>
+                      <MediumBold
+                      text={product.productName}
+                      />
                     </Typography>
                   </Grid>
                   <Grid item>
-                    <Typography xs variant="h5" component="div" sx={{ pt: 2 }}>
+                    <Typography xs component="div" sx={{ pt: 2 }}>
                       <Typography
                         xs
                         component="div"
@@ -115,7 +119,9 @@ function ItemDetails(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Typography variant="body2">{product.productDesc}</Typography>
+                  <SmallRegular
+                  text={product.productDesc}
+                  />
                 </Grid>
 
                 <Grid item xs={12}>
