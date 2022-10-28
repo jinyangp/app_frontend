@@ -14,6 +14,7 @@ import MediumBold from "../components/texts/MediumBold";
 import SmallRegular from "../components/texts/SmallRegular";
 import BuyNowButton from "../components/buttons/BuyNowButton";
 import useStyles from "../components/SearchProductsPage/ProductsStyle";
+import SetTargetPriceModal from "../components/SetTargetPriceModal";
 
 function ItemDetails(props) {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,17 @@ function ItemDetails(props) {
   const { state } = useLocation();
 
   const classes = useStyles();
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const [onCloseModal,setOnCloseModal] = useState(false);
+
+  const setTargetPrice = () =>{
+    setOpenModal(true);
+  }
+
+
+
 
   const getProduct = () => {
     // productId: state.productId
@@ -70,6 +82,7 @@ function ItemDetails(props) {
       ) : (
         <div>
           <MainNavigation />
+          
           <Paper
             sx={{
               p: 2,
@@ -133,7 +146,11 @@ function ItemDetails(props) {
                     <BuyNowButton />
                   </Grid>
                   <Grid item>
-                    <AddToWishlistButton />
+                    <AddToWishlistButton onClickHandler={setTargetPrice}/>
+                    <SetTargetPriceModal 
+                    productName={product.productName} productPrice={product.productPrice}
+                    openModal={openModal} onCloseModal={()=>setOpenModal(false)}
+                    />
                   </Grid>
                 </Grid>
               </Grid>
