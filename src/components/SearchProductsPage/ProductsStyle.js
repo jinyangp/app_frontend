@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(() => ({
   root: {
-    width: 500,
-    height: 280,
+    width: 700,
+    height: 300,
     maxWidth: "100%",
     maxHeight: "100%",
     padding: 5,
@@ -14,8 +14,9 @@ export default makeStyles(() => ({
     // justifyContent: "space-between",
   },
   media: {
+    padding: "20%",
     height: "100%",
-    width: "45%",
+    width: "50%",
 
     // borderRadius: 40,
     // paddingTop: "56.25",
@@ -39,7 +40,7 @@ export default makeStyles(() => ({
 
   platformContainer: {
     backgroundColor: "#454552",
-    height: 25,
+    height: 22,
     width: 80,
     borderRadius: 5,
   },
@@ -50,7 +51,7 @@ export default makeStyles(() => ({
 
   textContainer: {
     padding: "5%",
-    lineHeight: "180%",
+    lineHeight: "150%",
   },
 
   alignLeft: {
