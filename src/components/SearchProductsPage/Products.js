@@ -55,39 +55,6 @@ const Products = ({ product }) => {
       </Card>
     </button>
   );
-  // } else {
-  //   return (
-  //     <button
-  //       className={classes.buttonContainer}
-  //       onClick={viewSpecificItemHandler}
-  //     >
-  //       <Card className={classes.root}>
-  //         <CardMedia
-  //           className={classes.media}
-  //           image={product.productImageurl}
-  //           title={product.productName}
-  //         />
-  //         <div className={classes.textContainer}>
-  //           <div className={classes.alignLeft}>
-  //             <MediumRegular text={product.productName.slice(0, 17) + "..."} />
-  //           </div>
-  //           <div className={classes.platformContainer}>
-  //             <SmallBold
-  //               text={product.productPlatform}
-  //               textStyles={classes.platformText}
-  //             />
-  //           </div>
-  //           <div className={classes.priceContainer}>
-  //             <h2>
-  //               <b>${product.productPrice}</b>
-  //             </h2>
-  //           </div>
-  //           <AddToWishListButton onClickHandler={addToWishListHandler} />
-  //         </div>
-  //       </Card>
-  //     </button>
-  //   );
-  // }
 };
 
 export default Products;
