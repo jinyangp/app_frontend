@@ -12,10 +12,10 @@ function AddToWishlistButton(props) {
         onClick={props.onClickHandler}
       >
         <div className={classes.iconContainer}>
-          <IoIosHeartEmpty size={22} />
+          <IoIosHeartEmpty size={18} />
         </div>
         <div className={classes.textContainer}>
-          <SmallRegular text="Add to Wish list" />
+          <SmallRegular textStyles={classes.text} text="Add to Wish list" />
         </div>
       </div>
     </span>

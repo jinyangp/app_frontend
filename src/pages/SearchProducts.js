@@ -11,6 +11,7 @@ function SearchProducts(props) {
   const [products, setProducts] = useState([]);
 
   const { state } = useLocation();
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1300);
 
   const getProducts = () => {
     setIsLoading(true);
@@ -47,9 +48,23 @@ function SearchProducts(props) {
     getProducts();
   }, []);
 
+  // Function to update styles according to viewport's width STEP
+  const getStyles = () => {
+    if (window.innerWidth >= 1300) {
+      setIsWideScreen(true);
+    } else {
+      setIsWideScreen(false);
+    }
+  };
+
+  // Listen to changes in viewport's width STEP
   useEffect(() => {
-    console.log(products);
-  }, [isLoading]);
+    window.addEventListener("resize", getStyles);
+
+    return () => {
+      window.removeEventListener("resize", getStyles);
+    };
+  });
 
   const onClickItemHandler = (productId) => {
     // Redirect to new page with product id as a query parameter
@@ -75,6 +90,7 @@ function SearchProducts(props) {
               onClickItemHandler={() => {
                 onClickItemHandler(product.productId);
               }}
+              isWideScreen={isWideScreen}
             />
           </Grid>
         ))}

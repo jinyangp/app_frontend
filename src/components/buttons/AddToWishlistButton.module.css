@@ -1,20 +1,27 @@
 .btnContainer {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
-  width: 157px;
-  height: 37px;
+  align-items: center;
+  width: 125px;
+  height: 30px;
   border: radius 10px;
 }
 
 .iconContainer {
-  height: 80%;
-  /* width: 15%; */
-  margin-right: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-right: 5px;
 }
 
 .textContainer {
   height: 100%;
-  width: 85%;
-  text-align: center;
+  line-height: 100%;
+}
+
+.text {
+  text-align: left;
+  vertical-align: middle;
+  width: 100px;
 }

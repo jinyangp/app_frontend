@@ -3,11 +3,11 @@ import AddToWishListButton from "../buttons/AddToWishlistButton";
 import { Card, CardMedia } from "@material-ui/core";
 
 import useStyles from "./ProductsStyle";
-import MediumRegular from "../texts/MediumRegular";
+import NormalRegular from "../texts/NormalRegular";
+import MediumBold from "../texts/MediumBold";
 import SmallBold from "../texts/SmallBold";
-import LargeBold from "../texts/LargeBold";
 
-const Products = ({ product, onClickItemHandler  }) => {
+const Products = ({ product, onClickItemHandler, isWideScreen }) => {
   const classes = useStyles();
 
   function addToWishListHandler(event) {
@@ -20,37 +20,30 @@ const Products = ({ product, onClickItemHandler  }) => {
 
   // if (product.productName.length <= 17) {
   return (
-    <button
-      className={classes.buttonContainer}
+    <Card
+      className={isWideScreen ? classes.rootWideScreen : classes.rootLaptop}
       onClick={onClickItemHandler}
     >
-      <Card className={classes.root}>
-        <CardMedia
-          className={classes.media}
-          image={product.productImageurl}
-          title={product.productName}
-        />
-        <div className={classes.textContainer}>
-          <div className={classes.alignLeft}>
-            <MediumRegular text={product.productName} />
-          </div>
-
-          <div className={classes.platformContainer}>
-            <SmallBold
-              text={product.productPlatform}
-              textStyles={classes.platformText}
-            />
-          </div>
-          <p></p>
-
-          <div className={classes.alignLeft}>
-            <LargeBold text={"$" + product.productPrice} />
-          </div>
-
-          <AddToWishListButton onClickHandler={addToWishListHandler} />
+      <CardMedia className={classes.media} image={product.productImageurl} />
+      <div className={classes.detailsContainer}>
+        <div className={classes.productNameContainer}>
+          <NormalRegular text={product.productName} />
         </div>
-      </Card>
-    </button>
+
+        <div className={classes.platformContainer}>
+          <SmallBold
+            text={product.productPlatform}
+            textStyles={classes.platformText}
+          />
+        </div>
+        <p></p>
+
+        <div className={classes.alignLeft}>
+          <MediumBold text={"$" + product.productPrice} />
+        </div>
+        <AddToWishListButton onClickHandler={addToWishListHandler} />
+      </div>
+    </Card>
   );
 };
 
