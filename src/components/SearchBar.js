@@ -52,7 +52,7 @@ function SearchBar({ placeholder }) {
                 style={{ color: "white" }}
                 onClick={() => {
                   onClickHandler();
-                  window.location.reload();
+                  window.location.reload(false);
                 }}
               />
             </button>
