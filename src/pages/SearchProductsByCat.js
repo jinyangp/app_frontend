@@ -5,7 +5,7 @@ import Products from "../components/SearchProductsPage/Products";
 import Utils from "../helper/Utils";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function SearchProducts(props) {
+function SearchProductsByCategory(props) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
@@ -99,4 +99,4 @@ function SearchProducts(props) {
   );
 }
 
-export default SearchProducts;
+export default SearchProductsByCategory;
