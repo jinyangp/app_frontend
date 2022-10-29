@@ -13,14 +13,12 @@ function SearchProducts(props) {
   const { state } = useLocation();
 
   const getProducts = () => {
-
     setIsLoading(true);
 
     Utils.getApi("/products/getItemsByCategory", { cat: state.catId })
       .then((res) => {
         // console.log(res);
         setIsLoading(true);
-
 
         for (let pro of res.data) {
           setProducts((prevPros) => [
@@ -33,8 +31,6 @@ function SearchProducts(props) {
               productPrice: pro.price_price,
               productDescription: pro.product_desc,
               productPlatform: pro.product_platform,
-
-
             },
           ]);
         }
@@ -72,10 +68,14 @@ function SearchProducts(props) {
       </h2>
       <Grid container spacing={3}>
         {products.map((product, index) => (
-          <Grid item key={product.productId} xs={6} lg={4} xl={4}>
-            <Products product={product} key={index} onClickItemHandler={() => {
-              onClickItemHandler(product.productId)
-            }}/>
+          <Grid item key={product.productId} xs={6} lg={6} xl={6}>
+            <Products
+              product={product}
+              key={index}
+              onClickItemHandler={() => {
+                onClickItemHandler(product.productId);
+              }}
+            />
           </Grid>
         ))}
       </Grid>
