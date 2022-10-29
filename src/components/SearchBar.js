@@ -21,6 +21,14 @@ function SearchBar({ placeholder }) {
     }
   };
 
+  const onClickHandler = () => {
+    navigate(`/products/${searchText}`, {
+      state: {
+        searchQuery: searchText,
+      },
+    });
+  };
+
   return (
     <section>
       <div className={classes.searchbarContainer}>
@@ -39,7 +47,14 @@ function SearchBar({ placeholder }) {
           />
           <div className={classes.searchIconContainer}>
             <button>
-              <SearchIcon type="submit" style={{ color: "white" }} />
+              <SearchIcon
+                type="submit"
+                style={{ color: "white" }}
+                onClick={() => {
+                  onClickHandler();
+                  window.location.reload();
+                }}
+              />
             </button>
           </div>
         </div>
