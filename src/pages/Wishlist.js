@@ -1,4 +1,3 @@
-import AddToWishlistButton from "../components/buttons/AddToWishlistButton";
 import MainNavigation from "../components/MainNavigation";
 
 function Wishlist(props) {
@@ -6,7 +5,6 @@ function Wishlist(props) {
     <section>
       <div>
         <MainNavigation />
-        <AddToWishlistButton />
       </div>
     </section>
   );
