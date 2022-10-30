@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import { useNavigate } from "react-router-dom";
+
+import { Menu, MenuItem } from "@mui/material";
+import NotifBadge from "./notifications/NotifBadge";
+import NotifItem from "./notifications/NotifItem";
 
 import SearchBar from "./SearchBar";
 import NormalRegular from "./texts/NormalRegular";
@@ -10,9 +14,100 @@ import Utils from "../helper/Utils";
 
 function MainNavigation() {
   const [isAuth, setIsAuth] = useState(false);
+  const [isNotifLoading, setIsNotifLoading] = useState(false);
+  const [notifs, setNotifs] = useState([]);
+  const [notifAnchorElm, setNotifAnchorElm] = useState(null);
+  const [notifOpen, setNotifOpen] = useState(false);
+  const notifRef = useRef(null);
+
   const navigate = useNavigate();
 
+  const getNotificationsHandler = () => {
+    setIsNotifLoading(true);
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+
+    const reqData = {
+      token: token,
+      queryParams: {
+        userId: userId,
+      },
+    };
+    Utils.getProtectedApi("/wishlists/getNotifications", reqData)
+      .then((res) => {
+        if (res.message && res.message == "Unauthenticated") {
+          console.log("Unauthenticated");
+          setIsNotifLoading(false);
+          return;
+        }
+
+        if (res.message && res.message == "Not found") {
+          setNotifs([]);
+          setIsNotifLoading(false);
+          return;
+        }
+
+        for (let notif of res.data) {
+          setNotifs((notifs) => {
+            if (
+              notifs.some((notification) => {
+                return notification.notifId == notif.notif_item_id;
+              })
+            ) {
+              return notifs;
+            } else {
+              return [
+                ...notifs,
+                {
+                  notifId: notif.notif_item_id,
+                  notifUserId: notif.notif_user_id,
+                  notifProductId: notif.notif_product_id,
+                  notifMessage: notif.notif_message,
+                  notifTimeStamp: new Date(notif.notif_timestamp),
+                  notifIsRead: notif.notif_read,
+                  productImageUrl:
+                    "http://localhost:8080/images/" + notif.product_imageurl,
+                },
+              ];
+            }
+          });
+        }
+        setIsNotifLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getUnreadNotifCounts = () => {
+    let count = 0;
+
+    for (let notif of notifs) {
+      if (notif.notifIsRead == 0) {
+        count++;
+      }
+    }
+
+    return count;
+  };
+
   useEffect(() => {
+    getNotificationsHandler();
+    const interval = setInterval(() => {
+      getNotificationsHandler();
+    }, 10 * 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  // Functions to display notificaiton menu STEP
+  const onCloseNotifsHandler = () => {
+    setNotifOpen(false);
+  };
+
+  // Function to verify JWT token STEP
+  const verifyTokenHandler = () => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
@@ -34,6 +129,10 @@ function MainNavigation() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  useEffect(() => {
+    verifyTokenHandler();
   }, []);
 
   if (isAuth) {
@@ -61,9 +160,25 @@ function MainNavigation() {
                 <NormalRegular text="Wish List" />
               </div>
 
-              <div className={classes.authedLinkContainer}>
-                <NormalRegular text="Notifications" />
-              </div>
+              <NotifBadge
+                innerRef={notifRef}
+                notifCount={getUnreadNotifCounts()}
+                openNotifMenuHandler={() => {
+                  setNotifAnchorElm(notifRef.current);
+                  setNotifOpen(true);
+                }}
+              />
+              <Menu
+                anchorEl={notifAnchorElm}
+                open={notifOpen}
+                onClose={onCloseNotifsHandler}
+              >
+                <div style={{ height: notifs.length * 70, width: 300 }}>
+                  {notifs.map((notif) => {
+                    return <NotifItem key={notif.notifId} notif={notif} />;
+                  })}
+                </div>
+              </Menu>
 
               <li className={`btn--black ${classes.userContainer}`}>
                 <div
