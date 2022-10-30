@@ -1,20 +1,28 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Card from "../Card";
 import classes from "./NewSignUpForm.module.css";
 import { Link } from "react-router-dom";
 import { Spin } from "antd";
 import "antd/es/spin/style/css";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function NewSignUpForm(props) {
   const usernameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
-  // const [errorMessage, setErrorMessage] = useState("");
+  function togglePassword1(event) {
+    setPasswordShown(!passwordShown);
+  }
+
+  function togglePassword2(event) {
+    setConfirmPasswordShown(!confirmPasswordShown);
+  }
 
   function submitHandler(event) {
-    // console.log("clicked sign up");
     event.preventDefault();
 
     //   reading what the user entered
@@ -50,22 +58,40 @@ function NewSignUpForm(props) {
 
           <div className={classes.control}>
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              required
-              id="password"
-              ref={passwordInputRef}
-            />
+            <div className={classes.passwordContainer}>
+              <input
+                type={passwordShown ? "text" : "password"}
+                required
+                id="password"
+                ref={passwordInputRef}
+              />
+              <button
+                className={classes.hidePasswordContainer}
+                onClick={togglePassword1}
+                type="button"
+              >
+                <VisibilityIcon />
+              </button>
+            </div>
           </div>
 
           <div className={classes.control}>
             <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              required
-              id="confirmPassword"
-              ref={confirmPasswordInputRef}
-            />
+            <div className={classes.passwordContainer}>
+              <input
+                type={confirmPasswordShown ? "text" : "password"}
+                required
+                id="confirmPassword"
+                ref={confirmPasswordInputRef}
+              />
+              <button
+                className={classes.hidePasswordContainer}
+                onClick={togglePassword2}
+                type="button"
+              >
+                <VisibilityIcon />
+              </button>
+            </div>
           </div>
 
           <div className={classes.actions}>

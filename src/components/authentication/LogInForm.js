@@ -1,13 +1,19 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Card from "../Card";
 import classes from "./LogInForm.module.css";
 import { Link } from "react-router-dom";
 import { Spin } from "antd";
 import "antd/es/spin/style/css";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function LogInForm(props) {
   const usernameEmailInputRef = useRef();
   const passwordInputRef = useRef();
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  function togglePassword(event) {
+    setPasswordShown(!passwordShown);
+  }
 
   function submitHandler(event) {
     console.log("clicked log in");
@@ -24,8 +30,6 @@ function LogInForm(props) {
     };
 
     props.onLogIn(logInData);
-
-    //redirect to main page
   }
 
   return (
@@ -44,12 +48,21 @@ function LogInForm(props) {
 
           <div className={classes.control}>
             <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              required
-              id="password"
-              ref={passwordInputRef}
-            />
+            <div className={classes.passwordContainer}>
+              <input
+                type={passwordShown ? "text" : "password"}
+                required
+                id="password"
+                ref={passwordInputRef}
+              />
+              <button
+                className={classes.hidePasswordContainer}
+                onClick={togglePassword}
+                type="button"
+              >
+                <VisibilityIcon />
+              </button>
+            </div>
           </div>
 
           <div className={classes.actions}>
