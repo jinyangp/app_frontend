@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MainNavigation from "../components/MainNavigation";
 import { Grid } from "@material-ui/core";
 import Utils from "../helper/Utils";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -22,15 +22,30 @@ function ItemDetails(props) {
 
   const { state } = useLocation();
 
+  const navigate = useNavigate();
+
   const classes = useStyles();
 
   const [openModal, setOpenModal] = useState(false);
 
   const [onCloseModal,setOnCloseModal] = useState(false);
 
-  const setTargetPrice = () =>{
-    setOpenModal(true);
-  }
+  //sends to external purchase page
+  const buyNowButtonHandler =() => {
+    window.location.href = product.productPurchaseUrl;
+  };
+
+  //opens setTargetPrice Modal or login page depending on user log in status
+  const addToWishlistButtonHandler = () =>{
+    if (localStorage.length > 0){
+      setOpenModal(true);
+    }
+    else{
+        navigate("/login");
+      
+    }
+    
+  };
 
 
 
@@ -143,11 +158,11 @@ function ItemDetails(props) {
 
                 <Grid container xs={12} spacing={1}>
                   <Grid item>
-                    <BuyNowButton />
+                    <BuyNowButton onClickHandler={buyNowButtonHandler}/>
                   </Grid>
                   <Grid item>
-                    <AddToWishlistButton onClickHandler={setTargetPrice}/>
-                    <SetTargetPriceModal 
+                    <AddToWishlistButton onClickHandler={addToWishlistButtonHandler}/>
+                    <SetTargetPriceModal productId={product.productId}
                     productName={product.productName} productPrice={product.productPrice}
                     openModal={openModal} onCloseModal={()=>setOpenModal(false)}
                     />
