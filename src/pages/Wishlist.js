@@ -3,12 +3,10 @@ import MainNavigation from "../components/MainNavigation";
 
 function Wishlist(props) {
   return (
-    <section>
-      <div>
-        <MainNavigation />
-        <AddToWishlistButton />
-      </div>
-    </section>
+    <div className="default-page-margin">
+      <MainNavigation />
+      <AddToWishlistButton />
+    </div>
   );
 }
 
