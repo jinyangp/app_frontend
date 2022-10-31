@@ -50,7 +50,7 @@ function ItemDetails(props) {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [state.productId]);
 
   useEffect(() => {
     console.log(product);

@@ -53,6 +53,25 @@ Utils.getApi = async function (endPoint, parameters = {}) {
   }
 };
 
+Utils.putApi = async function (endPoint, data = {}) {
+  const url = baseUrl + endPoint;
+
+  try {
+    const res = await axios({
+      method: "PUT",
+      url: url,
+      headers: {
+        authorization: "Bearer " + JSON.parse(data.token),
+      },
+      data: data.body,
+    });
+
+    return res;
+  } catch (err) {
+    return onErrorHandler(err);
+  }
+};
+
 Utils.getProtectedApi = async function (endPoint, data = {}) {
   const url = baseUrl + endPoint;
 
