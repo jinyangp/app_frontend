@@ -57,7 +57,16 @@ function SearchProductsByName(props) {
     }
 
     if (!isLoading && products.length == 0) {
-      return <h1 style={{ textAlign: "center" }}>Item Not Found</h1>;
+      return (
+        <h1
+          style={{
+            textAlign: "center",
+            marginTop: 100,
+          }}
+        >
+          Item Not Found
+        </h1>
+      );
     } else {
       return (
         <Grid container justifyContent="center" spacing={4}>
