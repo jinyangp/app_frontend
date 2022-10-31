@@ -8,7 +8,7 @@ import SmallBold from "../components/texts/SmallBold";
 import MediumBold from "../components/texts/MediumBold";
 import SmallRegular from "../components/texts/SmallRegular";
 import { Grid } from "@material-ui/core";
-import SearchProducts from "../pages/SearchProducts";
+import SearchProductsByCategory from "../pages/SearchProductsByCat";
 import UpButton from "./buttons/UpButton";
 import DownButton from "./buttons/DownButton";
 import ConfirmButton from "./buttons/ConfirmButton";
