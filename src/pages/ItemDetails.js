@@ -220,23 +220,19 @@ function ItemDetails(props) {
               >
                 <Grid item container xs={12} spacing={2}>
                   <Grid item>
-                    <Typography xs component="div" sx={{ pt: 1.5 }}>
+                    <Typography xs component="div"
+                                    sx={{
+                                    pt:2 ,
+                                    direction:"row",
+                                    gap: 2,
+                                    alignItems:"baseline",}}>
                       <MediumBold text={product.productName} />
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography xs component="div" sx={{ pt: 2 }}>
-                      <Typography
-                        xs
-                        component="div"
-                        
-                        className={classes.platformContainer}
-                      >
+                      <div className={classes.platformContainer}>
                         <SmallBold
                           text={product.productPlatform}
                           textStyles={classes.platformText}
                         />
-                      </Typography>
+                      </div>
                     </Typography>
                   </Grid>
                 </Grid>
@@ -246,7 +242,7 @@ function ItemDetails(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <LargeBold text={"$" + product.productPrice} />
+                  <MediumBold text={"$" + product.productPrice} />
                 </Grid>
 
                 <Grid container xs={12} spacing={1}>

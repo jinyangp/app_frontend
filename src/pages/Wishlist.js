@@ -6,15 +6,18 @@ import WishlistCard from "../components/wishlist/WishlistCard";
 import Utils from "../helper/Utils";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Context } from "../store/store";
+import EditTargetPriceModal from "../components/EditTargetPriceModal";
 
 function Wishlist(props) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [wishlistItem, setWishlistItem] = useState([]);
   const [state, dispatch] = useContext(Context);
-
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1300);
+  
 
 
   const getWishlistItems = () => {
@@ -55,6 +58,32 @@ function Wishlist(props) {
       })
       .then(() => {
         setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onOpenModalHandler = (wishlistItem) => {
+    // if not logged in, redirect to logged in page STEP
+    const token = state?.userDetails.token;
+    const userId = state?.userDetails.userId;
+
+    const reqData = {
+      token: token,
+      queryParams: {
+        userId: userId,
+      },
+    };
+
+    Utils.getProtectedApi("/users/verifyJWT", reqData)
+      .then((res) => {
+        if (res.message && res.message == "Unauthenticated") {
+          navigate("/login");
+        } else {
+          setSelectedProduct(wishlistItem);
+          setIsModalOpen(true);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -112,11 +141,28 @@ function Wishlist(props) {
               onClickItemHandler={() => {
                 onClickItemHandler(wishlistItem.productId);
               }}
+              onEditTargetPriceHandler={(wishlistItem) => {
+                onOpenModalHandler(wishlistItem);
+              }}
               isWideScreen={isWideScreen}
             />
           </Grid>
         ))}
       </Grid>
+      {selectedProduct ? (
+        <EditTargetPriceModal
+          productId={selectedProduct.productId}
+          productName={selectedProduct.productName}
+          productPrice={selectedProduct.productPrice}
+          targetPrice={selectedProduct.targetPrice}
+          isModalOpen={isModalOpen}
+          onCloseModal={() => {
+            setIsModalOpen(false);
+          }}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

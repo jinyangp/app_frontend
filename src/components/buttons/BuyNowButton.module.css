@@ -1,22 +1,27 @@
 .btnContainer {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 180px;
-    height: 40px;
-    border: radius 10px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 125px;
+  height: 30px;
+  border: radius 10px;
+}
 
-  .iconContainer {
-    height: 100%;
-    width: 15%;
-    margin-right: 5px;
-  }
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-right: 5px;
+}
 
-  .textContainer {
-    margin-left: 20px;
-    height: 100%;
-    width: 85%;
-  }
+.textContainer {
+  height: 100%;
+  line-height: 100%;
+}
+
+.text {
+  text-align: left;
+  vertical-align: middle;
+  width: 70px;
+}
