@@ -218,7 +218,11 @@ function MainNavigation() {
                     aria-haspopup="true"
                     aria-expanded={profileOpen ? "true" : undefined}
                     onClick={profileClickHandler}
-                    sx={{ color: "white" }}
+                    style={{
+                      color: "white",
+                      width: 120,
+                      height: 40,
+                    }}
                   >
                     <b>
                       {checkUsernameLength()
@@ -238,7 +242,16 @@ function MainNavigation() {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem onClick={profileLogoutHandler}>Logout</MenuItem>
+                    <MenuItem
+                      style={{
+                        width: 120,
+                        height: 20,
+                        justifyContent: "center",
+                      }}
+                      onClick={profileLogoutHandler}
+                    >
+                      Logout
+                    </MenuItem>
                   </Menu>
                 </div>
               </li>
