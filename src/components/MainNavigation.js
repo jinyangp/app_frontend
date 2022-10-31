@@ -20,7 +20,6 @@ function MainNavigation() {
   const [notifs, setNotifs] = useState([]);
   const [notifAnchorElm, setNotifAnchorElm] = useState(null);
   const [notifOpen, setNotifOpen] = useState(false);
-
   const [state, dispatch] = useContext(Context);
 
   const notifRef = useRef(null);

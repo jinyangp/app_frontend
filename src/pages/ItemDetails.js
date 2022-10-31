@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
-import MainNavigation from "../components/MainNavigation";
+import React, { useState, useEffect, useContext } from "react";
 import { Grid } from "@material-ui/core";
-import Utils from "../helper/Utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
+
+import Utils from "../helper/Utils";
+import MainNavigation from "../components/MainNavigation";
 import AddToWishlistButton from "../components/buttons/AddToWishlistButton";
+import RemoveFromWishlistButton from "../components/buttons/RemoveFromWishlistButton";
 import LargeBold from "../components/texts/LargeBold";
 import SmallBold from "../components/texts/SmallBold";
 import MediumBold from "../components/texts/MediumBold";
@@ -15,44 +17,29 @@ import SmallRegular from "../components/texts/SmallRegular";
 import BuyNowButton from "../components/buttons/BuyNowButton";
 import useStyles from "../components/SearchProductsPage/ProductsStyle";
 import SetTargetPriceModal from "../components/SetTargetPriceModal";
+import { Context } from "../store/store";
 
 function ItemDetails(props) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const classes = useStyles();
+  const [state, dispatch] = useContext(Context);
+
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState(undefined);
-
-  const { state } = useLocation();
-
-  const navigate = useNavigate();
-
-  const classes = useStyles();
-
-  const [openModal, setOpenModal] = useState(false);
-
-  const [onCloseModal,setOnCloseModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   //sends to external purchase page
-  const buyNowButtonHandler =() => {
+  const buyNowButtonHandler = () => {
     window.location.href = product.productPurchaseUrl;
   };
 
-  //opens setTargetPrice Modal or login page depending on user log in status
-  const addToWishlistButtonHandler = () =>{
-    if (localStorage.length > 0){
-      setOpenModal(true);
-    }
-    else{
-        navigate("/login");
-      
-    }
-    
-  };
-
-
-
-
   const getProduct = () => {
     // productId: state.productId
-    Utils.getApi("/products/getItemDetails", { productId: state.productId })
+    Utils.getApi("/products/getItemDetails", {
+      productId: location.state.productId,
+    })
       .then((res) => {
         setProduct({
           categoryId: res.data[0].category_id,
@@ -77,11 +64,121 @@ function ItemDetails(props) {
 
   useEffect(() => {
     getProduct();
-  }, [state.productId]);
+  }, [location.state.productId]);
+
+  const onOpenModalHandler = () => {
+    // if not logged in, redirect to logged in page STEP
+    const token = state?.userDetails.token;
+    const userId = state?.userDetails.userId;
+
+    const reqData = {
+      token: token,
+      queryParams: {
+        userId: userId,
+      },
+    };
+
+    Utils.getProtectedApi("/users/verifyJWT", reqData)
+      .then((res) => {
+        if (res.message && res.message == "Unauthenticated") {
+          navigate("/login");
+        } else {
+          setIsModalOpen(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const checkInWishlistHandler = () => {
+    const productIds = state?.userDetails.wishlistIds;
+    return productIds.some((id) => {
+      return id == product.productId;
+    });
+  };
 
   useEffect(() => {
-    console.log(product);
-  }, [isLoading]);
+    if (state.userDetails.token == undefined || product == undefined) {
+      setIsInWishlist(false);
+      return;
+    }
+
+    if (checkInWishlistHandler()) {
+      setIsInWishlist(true);
+    } else {
+      setIsInWishlist(false);
+    }
+  }, [state?.userDetails.wishlistIds, product]);
+
+  const onRemoveFromWishlistHandler = (productId) => {
+    // if not logged in, redirect to logged in page STEP
+    const token = state?.userDetails.token;
+    const userId = state?.userDetails.userId;
+
+    console.log(token);
+
+    let reqData = {
+      token: token,
+      queryParams: {
+        userId: userId,
+      },
+    };
+
+    Utils.getProtectedApi("/users/verifyJWT", reqData)
+      .then((res) => {
+        if (res.message && res.message == "Unauthenticated") {
+          console.log("unauthenticated");
+          navigate("/login");
+          return;
+        }
+      })
+      .then(() => {
+        reqData = {
+          token: state.userDetails.token,
+          body: {
+            userId: state.userDetails.userId,
+            productId: productId,
+          },
+        };
+
+        Utils.deleteProtectedApi("/wishlists/removeWishlistItem", reqData).then(
+          (res) => {
+            // Not successful - display an error message
+            if (res.message && res.message === "Unauthenticated") {
+              console.log("Unauthenticated");
+              return;
+            }
+
+            if (res.message && res.message === "Unknown error") {
+              console.log("Server error. Please try again.");
+              return;
+            }
+
+            if (res.message && res.message === "Not found") {
+              console.log("Server error. Please try again.");
+              return;
+            }
+
+            const productIds = [...state.userDetails.wishlistIds].filter(
+              (id) => {
+                return id != productId;
+              }
+            );
+            localStorage.setItem("wishlistIds", JSON.stringify(productIds));
+            dispatch({
+              type: "REMOVE_FROM_WISHLIST",
+              payload: {
+                productIds: productIds,
+              },
+            });
+          }
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const Img = styled("img")({
     margin: "auto",
@@ -97,7 +194,7 @@ function ItemDetails(props) {
       ) : (
         <div>
           <MainNavigation />
-          
+
           <Paper
             sx={{
               p: 2,
@@ -154,13 +251,29 @@ function ItemDetails(props) {
 
                 <Grid container xs={12} spacing={1}>
                   <Grid item>
-                    <BuyNowButton onClickHandler={buyNowButtonHandler}/>
+                    <BuyNowButton onClickHandler={buyNowButtonHandler} />
                   </Grid>
                   <Grid item>
-                    <AddToWishlistButton onClickHandler={addToWishlistButtonHandler}/>
-                    <SetTargetPriceModal productId={product.productId}
-                    productName={product.productName} productPrice={product.productPrice}
-                    openModal={openModal} onCloseModal={()=>setOpenModal(false)}
+                    {isInWishlist ? (
+                      <RemoveFromWishlistButton
+                        onClickHandler={(event) => {
+                          event.stopPropagation();
+                          onRemoveFromWishlistHandler(product.productId);
+                        }}
+                      />
+                    ) : (
+                      <AddToWishlistButton
+                        onClickHandler={() => {
+                          onOpenModalHandler();
+                        }}
+                      />
+                    )}
+                    <SetTargetPriceModal
+                      productId={product.productId}
+                      productName={product.productName}
+                      productPrice={product.productPrice}
+                      isModalOpen={isModalOpen}
+                      onCloseModal={() => setIsModalOpen(false)}
                     />
                   </Grid>
                 </Grid>

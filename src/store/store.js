@@ -6,7 +6,7 @@ const assignItem = (keyName) => {
   const value = localStorage.getItem(keyName);
 
   if (value == undefined) {
-    return null;
+    return undefined;
   } else {
     if (keyName == "token") {
       return value;

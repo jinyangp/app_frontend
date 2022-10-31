@@ -23,8 +23,3 @@ function AddToWishlistButton(props) {
 }
 
 export default AddToWishlistButton;
-
-// How to use in main component
-{
-  /* <AddToWishlistButton onClickHandler={} /> */
-}
