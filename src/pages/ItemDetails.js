@@ -220,7 +220,7 @@ function ItemDetails(props) {
               >
                 <Grid item container xs={12} spacing={2}>
                   <Grid item>
-                    <Typography xs component="div" sx={{ pt: 2 }}>
+                    <Typography xs component="div" sx={{ pt: 1.5 }}>
                       <MediumBold text={product.productName} />
                     </Typography>
                   </Grid>
@@ -229,7 +229,7 @@ function ItemDetails(props) {
                       <Typography
                         xs
                         component="div"
-                        sx={{ pt: 1 }}
+                        
                         className={classes.platformContainer}
                       >
                         <SmallBold
