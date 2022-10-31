@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import LogInForm from "../components/authentication/LogInForm";
 import Utils from "../helper/Utils";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../store/store";
 
 function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const [state, dispatch] = useContext(Context);
 
   const onLogInHandler = (logInData) => {
     setIsLoading(true);
@@ -29,6 +32,22 @@ function Login() {
             JSON.stringify(res.data.userImageUrl)
           );
           localStorage.setItem("token", JSON.stringify(res.data.token));
+          localStorage.setItem(
+            "wishlistIds",
+            JSON.stringify(res.data.wishlistIds)
+          );
+
+          // dispatch an action to update redux store STEP
+          dispatch({
+            type: "LOG_IN",
+            payload: {
+              userId: res.data.userId,
+              userName: res.data.userName,
+              userImage: res.data.userImageUrl,
+              token: res.data.token,
+              wishlistIds: res.data.wishlistIds,
+            },
+          });
 
           // redirect to Home page
           navigate("/");
