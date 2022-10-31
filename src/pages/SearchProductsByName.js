@@ -56,7 +56,7 @@ function SearchProductsByName(props) {
     <div>
       <MainNavigation />
       {products.length == 0 ? (
-        <h1 style={{ textAlign: "center" }}>Not Found</h1>
+        <h1 style={{ textAlign: "center" }}>Item Not Found</h1>
       ) : (
         <Grid container justifyContent="center" spacing={4}>
           {products.map((product, index) => (
