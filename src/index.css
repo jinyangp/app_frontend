@@ -33,12 +33,11 @@ h4 {
 }
 
 .btn--red {
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.5rem;
   cursor: pointer;
   border-radius: 8px;
   background-color: #e85a71;
   color: white;
-  margin: 0 1rem;
 }
 
 .btn--red:hover {
@@ -46,7 +45,7 @@ h4 {
 }
 
 .btn--black {
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.5rem;
   cursor: pointer;
   border-radius: 8px;
   background-color: #454552;
@@ -59,7 +58,7 @@ h4 {
 }
 
 .btn--white {
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.5rem;
   cursor: pointer;
   border-radius: 8px;
   background-color: white;

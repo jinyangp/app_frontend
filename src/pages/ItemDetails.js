@@ -77,7 +77,7 @@ function ItemDetails(props) {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [state.productId]);
 
   useEffect(() => {
     console.log(product);
@@ -91,7 +91,7 @@ function ItemDetails(props) {
   });
 
   return (
-    <div>
+    <div className="default-page-margin">
       {isLoading ? (
         <></>
       ) : (
@@ -124,9 +124,7 @@ function ItemDetails(props) {
                 <Grid item container xs={12} spacing={2}>
                   <Grid item>
                     <Typography xs component="div" sx={{ pt: 2 }}>
-                      <MediumBold
-                      text={product.productName}
-                      />
+                      <MediumBold text={product.productName} />
                     </Typography>
                   </Grid>
                   <Grid item>
@@ -147,9 +145,7 @@ function ItemDetails(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <SmallRegular
-                  text={product.productDesc}
-                  />
+                  <SmallRegular text={product.productDesc} />
                 </Grid>
 
                 <Grid item xs={12}>

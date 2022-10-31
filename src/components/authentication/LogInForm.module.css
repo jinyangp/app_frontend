@@ -80,3 +80,13 @@
 .ant-spin-dot-item {
   background-color: #454552;
 }
+
+.passwordContainer {
+  display: flex;
+}
+
+.hidePasswordContainer {
+  background-color: transparent;
+  border-color: transparent;
+  height: 28px;
+}

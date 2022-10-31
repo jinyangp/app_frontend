@@ -1,0 +1,54 @@
+.mainContainer {
+  width: 300px;
+  height: 70px;
+  padding: 5px;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.imgContainer {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.textContainer {
+  width: 75%;
+}
+
+.messageContainer {
+  height: 70%;
+  line-height: 130%;
+}
+
+.timestampContainer {
+  height: 30%;
+}
+
+.timestampText {
+  color: #e85a71;
+}
+
+.unreadIconContainer {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unreadIcon {
+  width: 10px;
+  height: 10px;
+  background-color: #e85a71;
+  border-radius: 50%;
+}

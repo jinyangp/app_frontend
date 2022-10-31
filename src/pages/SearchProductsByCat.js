@@ -5,22 +5,21 @@ import Products from "../components/SearchProductsPage/Products";
 import Utils from "../helper/Utils";
 import { useNavigate, useLocation } from "react-router-dom";
 
-function SearchProducts(props) {
+function SearchProductsByCategory(props) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
   const { state } = useLocation();
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1300);
 
   const getProducts = () => {
-
     setIsLoading(true);
 
     Utils.getApi("/products/getItemsByCategory", { cat: state.catId })
       .then((res) => {
         // console.log(res);
         setIsLoading(true);
-
 
         for (let pro of res.data) {
           setProducts((prevPros) => [
@@ -33,8 +32,6 @@ function SearchProducts(props) {
               productPrice: pro.price_price,
               productDescription: pro.product_desc,
               productPlatform: pro.product_platform,
-
-
             },
           ]);
         }
@@ -51,9 +48,23 @@ function SearchProducts(props) {
     getProducts();
   }, []);
 
+  // Function to update styles according to viewport's width STEP
+  const getStyles = () => {
+    if (window.innerWidth >= 1300) {
+      setIsWideScreen(true);
+    } else {
+      setIsWideScreen(false);
+    }
+  };
+
+  // Listen to changes in viewport's width STEP
   useEffect(() => {
-    console.log(products);
-  }, [isLoading]);
+    window.addEventListener("resize", getStyles);
+
+    return () => {
+      window.removeEventListener("resize", getStyles);
+    };
+  });
 
   const onClickItemHandler = (productId) => {
     // Redirect to new page with product id as a query parameter
@@ -72,10 +83,15 @@ function SearchProducts(props) {
       </h2>
       <Grid container spacing={3}>
         {products.map((product, index) => (
-          <Grid item key={product.productId} xs={6} lg={4} xl={4}>
-            <Products product={product} key={index} onClickItemHandler={() => {
-              onClickItemHandler(product.productId)
-            }}/>
+          <Grid item key={product.productId} xs={6} lg={6} xl={6}>
+            <Products
+              product={product}
+              key={index}
+              onClickItemHandler={() => {
+                onClickItemHandler(product.productId);
+              }}
+              isWideScreen={isWideScreen}
+            />
           </Grid>
         ))}
       </Grid>
@@ -83,4 +99,4 @@ function SearchProducts(props) {
   );
 }
 
-export default SearchProducts;
+export default SearchProductsByCategory;

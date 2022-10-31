@@ -8,7 +8,7 @@ function Profile() {
     navigate("/");
   }
   return (
-    <div>
+    <div className="default-page-margin">
       <MainNavigation />
       <div>{localStorage.getItem("userId")}</div>
       <div>{localStorage.getItem("userName")}</div>
