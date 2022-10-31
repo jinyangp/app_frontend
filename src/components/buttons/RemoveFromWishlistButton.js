@@ -1,8 +1,8 @@
 import classes from "./RemoveFromWishlistbutton.module.css";
 import SmallRegular from "../texts/SmallRegular";
-import { IoMdHeartDislike } from "react-icons/io";
+import { IoHeartDislikeOutline } from "react-icons/io5";
 
-function RemoveFromWishlistButton(props) {
+function RemoveItemWishlistButton(props) {
   return (
     <span>
       <div
@@ -10,17 +10,14 @@ function RemoveFromWishlistButton(props) {
         onClick={props.onClickHandler}
       >
         <div className={classes.iconContainer}>
-          <IoMdHeartDislike size={18} />
+          <IoHeartDislikeOutline size={18} />
         </div>
         <div className={classes.textContainer}>
-          <SmallRegular
-            textStyles={classes.text}
-            text="Remove from Wish list"
-          />
+          <SmallRegular textStyles={classes.text} text="Remove Item" />
         </div>
       </div>
     </span>
   );
 }
 
-export default RemoveFromWishlistButton;
+export default RemoveItemWishlistButton;

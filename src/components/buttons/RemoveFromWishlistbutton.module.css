@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 160px;
+  width: 125px;
   height: 30px;
   border: radius 10px;
 }
@@ -23,5 +23,5 @@
 .text {
   text-align: left;
   vertical-align: middle;
-  width: 120px;
+  width: 100px;
 }
