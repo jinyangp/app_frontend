@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import { useNavigate } from "react-router-dom";
 
+import Button from "@mui/material/Button";
+
 import { Menu, MenuItem } from "@mui/material";
 import NotifBadge from "./notifications/NotifBadge";
 import NotifItem from "./notifications/NotifItem";
@@ -20,7 +22,35 @@ function MainNavigation() {
   const [notifOpen, setNotifOpen] = useState(false);
   const notifRef = useRef(null);
 
+  const [profileAnchorElm, setProfileAnchorElm] = useState(null);
+
+  const profileOpen = Boolean(profileAnchorElm);
+
+  // const [longUsername, setLongUsername] = useState(false);
+
   const navigate = useNavigate();
+
+  const checkUsernameLength = () => {
+    let longUsername = false;
+    if (JSON.parse(localStorage.getItem("userName")).length > 9) {
+      longUsername = true;
+    }
+    return longUsername;
+  };
+
+  const profileClickHandler = (event) => {
+    setProfileAnchorElm(event.currentTarget);
+  };
+
+  const profileCloseHandler = (event) => {
+    setProfileAnchorElm(null);
+  };
+
+  const profileLogoutHandler = () => {
+    //redirect to login page
+    navigate("/login");
+    localStorage.clear();
+  };
 
   const getNotificationsHandler = () => {
     setIsNotifLoading(true);
@@ -35,13 +65,13 @@ function MainNavigation() {
     };
     Utils.getProtectedApi("/wishlists/getNotifications", reqData)
       .then((res) => {
-        if (res.message && res.message == "Unauthenticated") {
+        if (res.message && res.message === "Unauthenticated") {
           console.log("Unauthenticated");
           setIsNotifLoading(false);
           return;
         }
 
-        if (res.message && res.message == "Not found") {
+        if (res.message && res.message === "Not found") {
           setNotifs([]);
           setIsNotifLoading(false);
           return;
@@ -51,7 +81,7 @@ function MainNavigation() {
           setNotifs((notifs) => {
             if (
               notifs.some((notification) => {
-                return notification.notifId == notif.notif_item_id;
+                return notification.notifId === notif.notif_item_id;
               })
             ) {
               return notifs;
@@ -83,7 +113,7 @@ function MainNavigation() {
     let count = 0;
 
     for (let notif of notifs) {
-      if (notif.notifIsRead == 0) {
+      if (notif.notifIsRead === 0) {
         count++;
       }
     }
@@ -120,7 +150,7 @@ function MainNavigation() {
 
     Utils.getProtectedApi("/users/verifyJWT", reqData)
       .then((res) => {
-        if (res.message && res.message == "Unauthenticated") {
+        if (res.message && res.message === "Unauthenticated") {
           setIsAuth(false);
         } else {
           setIsAuth(true);
@@ -181,12 +211,35 @@ function MainNavigation() {
               </Menu>
 
               <li className={`btn--black ${classes.userContainer}`}>
-                <div
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
-                >
-                  <b>{JSON.parse(localStorage.getItem("userName"))}</b>
+                <div>
+                  <Button
+                    id="basic-button"
+                    aria-controls={profileOpen ? "basic-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={profileOpen ? "true" : undefined}
+                    onClick={profileClickHandler}
+                    sx={{ color: "white" }}
+                  >
+                    <b>
+                      {checkUsernameLength()
+                        ? JSON.parse(localStorage.getItem("userName")).slice(
+                            0,
+                            8
+                          ) + "..."
+                        : JSON.parse(localStorage.getItem("userName"))}
+                    </b>
+                  </Button>
+                  <Menu
+                    id="basic-menu"
+                    anchorEl={profileAnchorElm}
+                    open={profileOpen}
+                    onClose={profileCloseHandler}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem onClick={profileLogoutHandler}>Logout</MenuItem>
+                  </Menu>
                 </div>
               </li>
             </ul>

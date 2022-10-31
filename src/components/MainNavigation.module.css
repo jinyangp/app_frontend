@@ -91,9 +91,8 @@
 }
 
 .userContainer {
-  height: 100%;
-  width: 35%;
-  max-width: 150px;
+  height: 35px;
+  width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
