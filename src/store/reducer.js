@@ -1,9 +1,12 @@
 const reducer = (state, action) => {
+  let updatedUserDetails;
+
   switch (action.type) {
     case "LOG_IN":
+      updatedUserDetails = { ...action.payload.userDetails };
       return {
         ...state,
-        userDetails: action.payload,
+        userDetails: updatedUserDetails,
       };
 
     case "LOG_OUT":
@@ -13,17 +16,24 @@ const reducer = (state, action) => {
       };
 
     case "ADD_TO_WISHLIST":
+      updatedUserDetails = {
+        ...state.userDetails,
+        wishlistIds: action.payload.productIds,
+      };
       return {
         ...state,
-        userDetails: state.userDetails.wishlistIds.push(action.payload),
+        userDetails: updatedUserDetails,
       };
 
     case "REMOVE_FROM_WISHLIST":
+      updatedUserDetails = {
+        ...state.userDetails,
+        wishlistIds: action.payload.productIds,
+      };
+
       return {
         ...state,
-        userDetails: state.userDetails.wishlistIds.filter(
-          (item) => item.id != action.payload
-        ),
+        userDetails: updatedUserDetails,
       };
 
     default:

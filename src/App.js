@@ -6,7 +6,6 @@ import SearchProductsByCategory from "./pages/SearchProductsByCat";
 import Wishlist from "./pages/Wishlist";
 import ItemDetails from "./pages/ItemDetails";
 import Profile from "./pages/Profile";
-
 import Store from "./store/store";
 
 function App() {

@@ -41,11 +41,13 @@ function Login() {
           dispatch({
             type: "LOG_IN",
             payload: {
-              userId: res.data.userId,
-              userName: res.data.userName,
-              userImage: res.data.userImageUrl,
-              token: res.data.token,
-              wishlistIds: res.data.wishlistIds,
+              userDetails: {
+                userId: res.data.userId,
+                userName: res.data.userName,
+                userImage: res.data.userImageUrl,
+                token: res.data.token,
+                wishlistIds: res.data.wishlistIds,
+              },
             },
           });
 
