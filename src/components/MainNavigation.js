@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import { useNavigate } from "react-router-dom";
@@ -12,14 +12,18 @@ import NormalRegular from "./texts/NormalRegular";
 import LargeBold from "./texts/LargeBold";
 import Utils from "../helper/Utils";
 
+import { Context } from "../store/store";
+
 function MainNavigation() {
-  const [isAuth, setIsAuth] = useState(false);
+  // const [isAuth, setIsAuth] = useState(false);
   const [isNotifLoading, setIsNotifLoading] = useState(false);
   const [notifs, setNotifs] = useState([]);
   const [notifAnchorElm, setNotifAnchorElm] = useState(null);
   const [notifOpen, setNotifOpen] = useState(false);
-  const notifRef = useRef(null);
 
+  const [state, dispatch] = useContext(Context);
+
+  const notifRef = useRef(null);
   const navigate = useNavigate();
 
   const getNotificationsHandler = () => {
@@ -107,35 +111,35 @@ function MainNavigation() {
   };
 
   // Function to verify JWT token STEP
-  const verifyTokenHandler = () => {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
+  // const verifyTokenHandler = () => {
+  //   const token = localStorage.getItem("token");
+  //   const userId = localStorage.getItem("userId");
 
-    const reqData = {
-      token: token,
-      queryParams: {
-        userId: userId,
-      },
-    };
+  //   const reqData = {
+  //     token: token,
+  //     queryParams: {
+  //       userId: userId,
+  //     },
+  //   };
 
-    Utils.getProtectedApi("/users/verifyJWT", reqData)
-      .then((res) => {
-        if (res.message && res.message == "Unauthenticated") {
-          setIsAuth(false);
-        } else {
-          setIsAuth(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //   Utils.getProtectedApi("/users/verifyJWT", reqData)
+  //     .then((res) => {
+  //       if (res.message && res.message == "Unauthenticated") {
+  //         setIsAuth(false);
+  //       } else {
+  //         setIsAuth(true);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  useEffect(() => {
-    verifyTokenHandler();
-  }, []);
+  // useEffect(() => {
+  //   verifyTokenHandler();
+  // }, []);
 
-  if (isAuth) {
+  if (state.userDetails.token) {
     return (
       <header className={classes.header}>
         <nav>
