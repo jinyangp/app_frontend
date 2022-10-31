@@ -46,15 +46,13 @@ function SearchBar({ placeholder }) {
             placeholder={placeholder}
           />
           <div className={classes.searchIconContainer}>
-            <button>
-              <SearchIcon
-                type="submit"
-                style={{ color: "white" }}
-                onClick={() => {
-                  onClickHandler();
-                  window.location.reload(false);
-                }}
-              />
+            <button
+              onClick={() => {
+                onClickHandler();
+                window.location.reload(false);
+              }}
+            >
+              <SearchIcon type="submit" style={{ color: "white" }} />
             </button>
           </div>
         </div>

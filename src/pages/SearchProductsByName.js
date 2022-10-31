@@ -13,12 +13,11 @@ function SearchProductsByName(props) {
   const { state } = useLocation();
 
   const getProducts = () => {
+    setIsLoading(true);
     Utils.getApi("/products/searchItem", {
       productName: state.searchQuery,
     })
       .then((res) => {
-        setIsLoading(true);
-
         if (res.message && res.message == "Not Found") {
           setProducts([]);
         } else {
@@ -52,12 +51,15 @@ function SearchProductsByName(props) {
     console.log(products);
   }, [isLoading]);
 
-  return (
-    <div>
-      <MainNavigation />
-      {products.length == 0 ? (
-        <h1 style={{ textAlign: "center" }}>Item Not Found</h1>
-      ) : (
+  const renderController = () => {
+    if (isLoading) {
+      return <></>;
+    }
+
+    if (!isLoading && products.length == 0) {
+      return <h1 style={{ textAlign: "center" }}>Item Not Found</h1>;
+    } else {
+      return (
         <Grid container justifyContent="center" spacing={4}>
           {products.map((product, index) => (
             <Grid item key={product.productId} xs={12} sm={6} md={4} lg={4}>
@@ -65,7 +67,14 @@ function SearchProductsByName(props) {
             </Grid>
           ))}
         </Grid>
-      )}
+      );
+    }
+  };
+
+  return (
+    <div>
+      <MainNavigation />
+      {renderController()}
     </div>
   );
 }
