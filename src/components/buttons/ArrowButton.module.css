@@ -1,0 +1,11 @@
+.btnContainer {
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    display: flex;
+  }
+
+  .iconContainer {
+    height: 100%;
+    width: 100%;
+  }
