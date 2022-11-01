@@ -4,6 +4,8 @@ const Utils = {};
 const baseUrl = "http://localhost:8080";
 
 const onErrorHandler = (err) => {
+  console.log(err);
+
   // user not logged in or token given is invalid
   if (err.response.status === 403 || err.response.status === 401) {
     return { message: "Unauthenticated" };

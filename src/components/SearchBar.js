@@ -1,22 +1,57 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import classes from "./SearchBar.module.css";
-import React, { useState } from "react";
 
-function SearchBar({ placeholder, data }) {
+function SearchBar({ placeholder }) {
+  const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
+
+  const onTextInputChange = (value) => {
+    setSearchText(value.target.value);
+  };
+
+  const onSearchHandler = (e) => {
+    if (e.key == "Enter") {
+      navigate(`/products/${searchText}`, {
+        state: {
+          searchQuery: searchText,
+        },
+      });
+    }
+  };
+
+  const onClickHandler = () => {
+    navigate(`/products/${searchText}`, {
+      state: {
+        searchQuery: searchText,
+      },
+    });
+  };
+
   return (
     <section>
       <div className={classes.searchbarContainer}>
         <div className={classes.textInputContainer}>
           <input
             className={classes.textInput}
+            onChange={(val) => {
+              onTextInputChange(val);
+            }}
+            onKeyDown={(e) => {
+              onSearchHandler(e);
+            }}
             type="text"
+            value={searchText}
             placeholder={placeholder}
           />
           <div className={classes.searchIconContainer}>
             <SearchIcon
+              type="submit"
               style={{ color: "white" }}
               onClick={() => {
-                console.log("Searching");
+                onClickHandler();
+                window.location.reload(false);
               }}
             />
           </div>
