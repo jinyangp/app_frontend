@@ -20,8 +20,10 @@ function MainNavigation() {
   // const [isAuth, setIsAuth] = useState(false);
   const [isNotifLoading, setIsNotifLoading] = useState(false);
   const [notifs, setNotifs] = useState([]);
+  const [unreadNotifCount, setUnReadNotifCount] = useState(0);
   const [notifAnchorElm, setNotifAnchorElm] = useState(null);
   const [notifOpen, setNotifOpen] = useState(false);
+  const [isReadingNotif, setIsReadingNotif] = useState(false);
   const [state, dispatch] = useContext(Context);
   const notifRef = useRef(null);
   const [profileAnchorElm, setProfileAnchorElm] = useState(null);
@@ -54,6 +56,18 @@ function MainNavigation() {
     localStorage.clear();
     dispatch({ type: "LOG_OUT" });
     window.location.reload();
+  };
+
+  const getUnreadNotifCounts = (notifications) => {
+    let count = 0;
+
+    for (let notif of notifications) {
+      if (notif.notif_read === 0) {
+        count++;
+      }
+    }
+
+    return count;
   };
 
   const getNotificationsHandler = () => {
@@ -106,23 +120,12 @@ function MainNavigation() {
             }
           });
         }
+        setUnReadNotifCount(getUnreadNotifCounts(res.data));
         setIsNotifLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const getUnreadNotifCounts = () => {
-    let count = 0;
-
-    for (let notif of notifs) {
-      if (notif.notifIsRead === 0) {
-        count++;
-      }
-    }
-
-    return count;
   };
 
   useEffect(() => {
@@ -135,39 +138,16 @@ function MainNavigation() {
     };
   }, []);
 
+  const onReadNotifHandler = () => {
+    setUnReadNotifCount((prevCount) => {
+      return prevCount - 1;
+    });
+  };
+
   // Functions to display notificaiton menu STEP
   const onCloseNotifsHandler = () => {
     setNotifOpen(false);
   };
-
-  // Function to verify JWT token STEP
-  // const verifyTokenHandler = () => {
-  //   const token = localStorage.getItem("token");
-  //   const userId = localStorage.getItem("userId");
-
-  //   const reqData = {
-  //     token: token,
-  //     queryParams: {
-  //       userId: userId,
-  //     },
-  //   };
-
-  //   Utils.getProtectedApi("/users/verifyJWT", reqData)
-  //     .then((res) => {
-  //       if (res.message && res.message == "Unauthenticated") {
-  //         setIsAuth(false);
-  //       } else {
-  //         setIsAuth(true);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   verifyTokenHandler();
-  // }, []);
 
   if (state.userDetails.token) {
     return (
@@ -196,7 +176,7 @@ function MainNavigation() {
 
               <NotifBadge
                 innerRef={notifRef}
-                notifCount={getUnreadNotifCounts()}
+                notifCount={unreadNotifCount}
                 openNotifMenuHandler={() => {
                   setNotifAnchorElm(notifRef.current);
                   setNotifOpen(true);
@@ -209,7 +189,13 @@ function MainNavigation() {
               >
                 <div style={{ height: notifs.length * 70, width: 300 }}>
                   {notifs.map((notif) => {
-                    return <NotifItem key={notif.notifId} notif={notif} />;
+                    return (
+                      <NotifItem
+                        key={notif.notifId}
+                        notif={notif}
+                        onReadNotif={onReadNotifHandler}
+                      />
+                    );
                   })}
                 </div>
               </Menu>

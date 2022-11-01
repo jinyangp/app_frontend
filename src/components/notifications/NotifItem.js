@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import classes from "./NotifItem.module.css";
 import Utils from "../../helper/Utils";
 import SmallRegular from "../texts/SmallRegular";
 
-const NotifItem = ({ notif }) => {
+const NotifItem = ({ notif, onReadNotif }) => {
   const navigate = useNavigate();
+  const [isRead, setIsRead] = useState(notif.notifIsRead);
 
   const onClickNotifHandler = () => {
     if (notif.notifIsRead == 1) {
@@ -23,12 +24,13 @@ const NotifItem = ({ notif }) => {
         },
       })
         .then((res) => {
+          setIsRead(true);
+          onReadNotif();
           navigate(`/item-details/${notif.notifProductId}`, {
             state: {
               productId: notif.notifProductId,
             },
           });
-          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -80,7 +82,7 @@ const NotifItem = ({ notif }) => {
         </div>
       </div>
 
-      {notif.notifIsRead == 0 ? (
+      {isRead == 0 ? (
         <div className={classes.unreadIconContainer}>
           <div className={classes.unreadIcon}></div>
         </div>
