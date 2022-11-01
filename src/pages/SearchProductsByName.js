@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import Products from "../components/SearchProductsPage/Products";
 import Utils from "../helper/Utils";
 import { useNavigate, useLocation } from "react-router-dom";
+import MediumBold from "../components/texts/MediumBold";
 
 import SetTargetPriceModal from "../components/SetTargetPriceModal";
 import { Context } from "../store/store";
@@ -128,7 +129,9 @@ function SearchProductsByName(props) {
     return (
       <div className="default-page-margin">
         <MainNavigation />
-        <h1 style={{ textAlign: "center", marginTop: 250 }}>Item Not Found</h1>
+        <h1 style={{ MediumBold, textAlign: "center", marginTop: 250 }}>
+          Item Not Found
+        </h1>
       </div>
     );
   } else {
