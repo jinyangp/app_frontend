@@ -17,7 +17,7 @@ export default makeStyles(() => ({
     padding: "20%",
     height: "100%",
     width: "50%",
-    marginRight: 10,  
+    marginRight: 10,
   },
 
   rootLaptop: {
@@ -31,8 +31,6 @@ export default makeStyles(() => ({
     boxShadow: "0px 2px 8px rgba(0,0,0,0.2)",
     display: "flex",
   },
-
-
 
   detailsContainer: {
     padding: 5,
@@ -57,16 +55,20 @@ export default makeStyles(() => ({
     textAlign: "center",
   },
 
+  targetPriceText: {
+    color: "#e85a71",
+  },
+
   platformText: {
     color: "white",
   },
 
   doubleRow: {
-    display:"flex",
-    direction:"row",
+    display: "flex",
+    direction: "row",
     gap: 10,
-    alignItems:"baseline",
-    },
+    alignItems: "baseline",
+  },
 
   priceContainer: {
     paddingTop: "5%",
