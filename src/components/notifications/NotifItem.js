@@ -28,6 +28,7 @@ const NotifItem = ({ notif }) => {
               productId: notif.notifProductId,
             },
           });
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);
