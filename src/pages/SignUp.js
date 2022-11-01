@@ -22,12 +22,16 @@ function SignUp() {
       }
     }
 
+    //checking valid email
+    if (!ValidateEmail(userData.userEmail)) {
+      setErrorMessage("Invalid Email");
+      setIsLoading(false);
+      return;
+    }
+
     //checking the password matches
     //if it matches, create a new object with just attributes: username, email, password
-    if (
-      userData.userPassword === userData.userConfirmPassword &&
-      ValidateEmail(userData.userEmail)
-    ) {
+    if (userData.userPassword === userData.userConfirmPassword) {
       const finalUserData = {
         userName: userData.userName,
         userEmail: userData.userEmail,
@@ -64,7 +68,7 @@ function SignUp() {
     }
     //if passwords dont match, do nothing
     else {
-      setErrorMessage("Password does not match / Invalid Email");
+      setErrorMessage("Password does not match");
       setIsLoading(false);
     }
   };
