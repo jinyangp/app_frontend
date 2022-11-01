@@ -130,7 +130,7 @@ const Products = ({
         <p></p>
 
         <div className={classes.alignLeft}>
-          <MediumBold text={"$" + product.productPrice} />
+          <MediumBold text={"$" + product.productPrice.toFixed(2)} />
         </div>
         {isInWishlist ? (
           <RemoveFromWishListButton

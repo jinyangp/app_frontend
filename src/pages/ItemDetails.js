@@ -250,7 +250,7 @@ function ItemDetails(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <MediumBold text={"$" + product.productPrice} />
+                  <MediumBold text={"$" + product.productPrice.toFixed(2)} />
                 </Grid>
 
                 <Grid container xs={12} spacing={1}>
