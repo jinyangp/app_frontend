@@ -12,14 +12,18 @@ import { Context } from "../../store/store";
 import Utils from "../../helper/Utils";
 import EditTargetPriceModal from "../EditTargetPriceModal";
 
-const WishlistCard = ({ wishlistItem, onClickItemHandler, isWideScreen, onEditTargetPriceHandler }) => {
+const WishlistCard = ({
+  wishlistItem,
+  onClickItemHandler,
+  isWideScreen,
+  onEditTargetPriceHandler,
+}) => {
   const classes = useStyles();
   const navigate = useNavigate();
   const [state, dispatch] = useContext(Context);
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
 
   const editTargetPriceModalHandler = (product) => {
     // if not logged in, redirect to logged in page STEP
@@ -107,15 +111,14 @@ const WishlistCard = ({ wishlistItem, onClickItemHandler, isWideScreen, onEditTa
                 productIds: productIds,
               },
             });
+            window.location.reload();
           }
         );
       })
       .catch((err) => {
         console.log(err);
       });
-      window.location.reload();
   };
-
 
   // if (product.productName.length <= 17) {
   return (
@@ -123,7 +126,10 @@ const WishlistCard = ({ wishlistItem, onClickItemHandler, isWideScreen, onEditTa
       className={isWideScreen ? classes.rootWideScreen : classes.rootLaptop}
       onClick={onClickItemHandler}
     >
-      <CardMedia className={classes.media} image={wishlistItem.productImageUrl} />
+      <CardMedia
+        className={classes.media}
+        image={wishlistItem.productImageUrl}
+      />
       <div className={classes.detailsContainer}>
         <div className={classes.productNameContainer}>
           <NormalRegular text={wishlistItem.productName} />
@@ -138,19 +144,26 @@ const WishlistCard = ({ wishlistItem, onClickItemHandler, isWideScreen, onEditTa
         <p></p>
 
         <div className={classes.doubleRow}>
-          <MediumBold text={"$" + wishlistItem.productPrice.toFixed(2)} /> <MediumRegular text={"(Target Price: $" + wishlistItem.targetPrice.toFixed(2) + ")"}/>
+          <MediumBold text={"$" + wishlistItem.productPrice.toFixed(2)} />{" "}
+          <MediumRegular
+            text={
+              "(Target Price: $" + wishlistItem.targetPrice.toFixed(2) + ")"
+            }
+          />
         </div>
         <div className={classes.doubleRow}>
-        <EditTargetPriceButton             
-        onClickHandler={(event) => {
+          <EditTargetPriceButton
+            onClickHandler={(event) => {
               event.stopPropagation();
               onEditTargetPriceHandler(wishlistItem);
-            }}/> 
-        <RemoveItemWishlistButton             
-        onClickHandler={(event) => {
+            }}
+          />
+          <RemoveItemWishlistButton
+            onClickHandler={(event) => {
               event.stopPropagation();
               onRemoveFromWishlistHandler(wishlistItem.productId);
-            }}/>
+            }}
+          />
         </div>
       </div>
     </Card>

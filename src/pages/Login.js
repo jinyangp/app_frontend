@@ -45,7 +45,7 @@ function Login() {
                 userId: res.data.userId,
                 userName: res.data.userName,
                 userImage: res.data.userImageUrl,
-                token: res.data.token,
+                token: JSON.stringify(res.data.token),
                 wishlistIds: res.data.wishlistIds,
               },
             },

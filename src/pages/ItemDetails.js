@@ -71,6 +71,10 @@ function ItemDetails(props) {
     const token = state?.userDetails.token;
     const userId = state?.userDetails.userId;
 
+    if (token == undefined || userId == undefined) {
+      navigate("/login");
+    }
+
     const reqData = {
       token: token,
       queryParams: {
@@ -220,12 +224,16 @@ function ItemDetails(props) {
               >
                 <Grid item container xs={12} spacing={2}>
                   <Grid item>
-                    <Typography xs component="div"
-                                    sx={{
-                                    pt:2 ,
-                                    direction:"row",
-                                    gap: 2,
-                                    alignItems:"baseline",}}>
+                    <Typography
+                      xs
+                      component="div"
+                      sx={{
+                        pt: 2,
+                        direction: "row",
+                        gap: 2,
+                        alignItems: "baseline",
+                      }}
+                    >
                       <MediumBold text={product.productName} />
                       <div className={classes.platformContainer}>
                         <SmallBold

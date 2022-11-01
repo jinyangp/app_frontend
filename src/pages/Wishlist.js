@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import MainNavigation from "../components/MainNavigation";
 import AddToWishlistButton from "../components/buttons/AddToWishlistButton";
-
 import { Grid } from "@material-ui/core";
 import WishlistCard from "../components/wishlist/WishlistCard";
 import Utils from "../helper/Utils";
@@ -34,7 +33,6 @@ function Wishlist(props) {
 
     Utils.getProtectedApi("/wishlists/getWishlistItems", reqData)
       .then((res) => {
-        console.log(res);
         setIsLoading(true);
 
         for (let pro of res.data) {
@@ -92,10 +90,6 @@ function Wishlist(props) {
   useEffect(() => {
     getWishlistItems();
   }, []);
-
-  useEffect(() => {
-    console.log(wishlistItem);
-  }, [wishlistItem]);
 
   // Function to update styles according to viewport's width STEP
   const getStyles = () => {

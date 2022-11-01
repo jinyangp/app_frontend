@@ -86,6 +86,10 @@ function SearchProductsByCategory(props) {
     const token = state?.userDetails.token;
     const userId = state?.userDetails.userId;
 
+    if (token == undefined || userId == undefined) {
+      navigate("/login");
+    }
+
     const reqData = {
       token: token,
       queryParams: {

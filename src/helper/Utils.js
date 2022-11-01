@@ -87,6 +87,7 @@ Utils.putApi = async function (endPoint, data = {}) {
 
     return res;
   } catch (err) {
+    // console.log(err);
     return onErrorHandler(err);
   }
 };

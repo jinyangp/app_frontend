@@ -33,6 +33,7 @@ function MainNavigation() {
 
   const checkUsernameLength = () => {
     let longUsername = false;
+
     if (JSON.parse(localStorage.getItem("userName")).length > 9) {
       longUsername = true;
     }
@@ -49,8 +50,10 @@ function MainNavigation() {
 
   const profileLogoutHandler = () => {
     //redirect to login page
-    navigate("/login");
+    navigate("/");
     localStorage.clear();
+    dispatch({ type: "LOG_OUT" });
+    window.location.reload();
   };
 
   const getNotificationsHandler = () => {
