@@ -31,6 +31,8 @@ function Wishlist(props) {
       },
     };
 
+    setWishlistItem([]);
+
     Utils.getProtectedApi("/wishlists/getWishlistItems", reqData)
       .then((res) => {
         setIsLoading(true);
@@ -89,7 +91,7 @@ function Wishlist(props) {
 
   useEffect(() => {
     getWishlistItems();
-  }, []);
+  }, [state.userDetails.wishlistIds]);
 
   // Function to update styles according to viewport's width STEP
   const getStyles = () => {

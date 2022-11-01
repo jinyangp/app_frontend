@@ -111,7 +111,7 @@ const WishlistCard = ({
                 productIds: productIds,
               },
             });
-            window.location.reload();
+            // window.location.reload();
           }
         );
       })
