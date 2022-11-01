@@ -10,13 +10,14 @@ import Utils from "../helper/Utils";
 import MainNavigation from "../components/MainNavigation";
 import AddToWishlistButton from "../components/buttons/AddToWishlistButton";
 import RemoveFromWishlistButton from "../components/buttons/RemoveFromWishlistButton";
-import LargeBold from "../components/texts/LargeBold";
 import SmallBold from "../components/texts/SmallBold";
 import MediumBold from "../components/texts/MediumBold";
 import SmallRegular from "../components/texts/SmallRegular";
 import BuyNowButton from "../components/buttons/BuyNowButton";
 import useStyles from "../components/SearchProductsPage/ProductsStyle";
 import SetTargetPriceModal from "../components/SetTargetPriceModal";
+import PriceTrendChart from "../components/pricetrend/PriceTrendChart";
+
 import { Context } from "../store/store";
 
 function ItemDetails(props) {
@@ -30,9 +31,97 @@ function ItemDetails(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);
 
+  const [timeStampLimit, setTimeStampLimit] = useState(
+    (Date.now() - 14 * 24 * 60 * 60 * 1000) / 1000
+  );
+  const [priceData, setPriceData] = useState([]);
+  const [isPriceDataLoading, setIsPriceDataLoading] = useState(false);
+  const [avgPrice, setAvgPrice] = useState(0);
+
   //sends to external purchase page
   const buyNowButtonHandler = () => {
     window.location.href = product.productPurchaseUrl;
+  };
+
+  function groupBy(arr, property) {
+    return arr.reduce(function (memo, x) {
+      if (!memo[x[property]]) {
+        memo[x[property]] = [];
+      }
+      memo[x[property]].push(x);
+      return memo;
+    }, {});
+  }
+
+  const getPriceTrends = () => {
+    if (product == undefined) {
+      setPriceData([]);
+      return;
+    }
+
+    setIsPriceDataLoading(true);
+    Utils.getApi("/products/getPrices", {
+      productName: product.productName,
+      timeStampLimit: timeStampLimit,
+    })
+      .then((res) => {
+        const groupedByPrices = groupBy(res.data, "product_platform");
+
+        const formattedDatas = { ...groupedByPrices };
+        let total = 0;
+        let count = 0;
+
+        for (let platformData in groupedByPrices) {
+          formattedDatas[platformData] = [];
+
+          for (let priceData of groupedByPrices[platformData]) {
+            formattedDatas[platformData].push([
+              priceData.price_timestamp * 1000,
+              priceData.price_price,
+            ]);
+
+            total += priceData.price_price;
+            count += 1;
+          }
+        }
+
+        const finalArr = [];
+        for (let platform in formattedDatas) {
+          finalArr.push({
+            name: platform,
+            type: "spline",
+
+            data: formattedDatas[platform],
+            tooltip: {
+              valueDecimals: 2,
+            },
+          });
+        }
+        setPriceData(finalArr);
+        setAvgPrice(total / count);
+      })
+      .then(() => {
+        setIsPriceDataLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const updateTimeStampHandler = (timeStamp) => {
+    let newTimeStamp;
+
+    if (timeStamp == "2 weeks") {
+      newTimeStamp = (Date.now() - 14 * 24 * 60 * 60 * 1000) / 1000;
+    } else if (timeStamp == "1 month") {
+      newTimeStamp = (Date.now() - 31 * 24 * 60 * 60 * 1000) / 1000;
+    }
+
+    if (newTimeStamp == timeStampLimit) {
+      return;
+    }
+
+    setTimeStampLimit(newTimeStamp);
   };
 
   const getProduct = () => {
@@ -65,6 +154,10 @@ function ItemDetails(props) {
   useEffect(() => {
     getProduct();
   }, [location.state.productId]);
+
+  useEffect(() => {
+    getPriceTrends();
+  }, [product, timeStampLimit]);
 
   const onOpenModalHandler = () => {
     // if not logged in, redirect to logged in page STEP
@@ -202,7 +295,9 @@ function ItemDetails(props) {
           <Paper
             sx={{
               p: 2,
-              margin: 8,
+              marginTop: 2,
+              marginBottom: 2,
+              width: "100%",
               maxWidth: 3000,
               flexGrow: 1,
             }}
@@ -284,6 +379,13 @@ function ItemDetails(props) {
               </Grid>
             </Grid>
           </Paper>
+          <PriceTrendChart
+            prices={priceData}
+            avgPrice={avgPrice}
+            updateTimeStamp={(timeStamp) => {
+              updateTimeStampHandler(timeStamp);
+            }}
+          />
         </div>
       )}
     </div>
