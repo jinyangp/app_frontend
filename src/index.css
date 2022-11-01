@@ -113,6 +113,11 @@ h4 {
   font-weight: normal;
 }
 
+.text-normal-bold {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .text-medium-regular {
   font-size: 20px;
   font-weight: normal;
