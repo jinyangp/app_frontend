@@ -12,10 +12,10 @@ function BuyNowButton(props) {
         onClick={props.onClickHandler}
       >
         <div className={classes.iconContainer}>
-          <HiOutlineShoppingBag size={22} />
+          <HiOutlineShoppingBag size={18} />
         </div>
         <div className={classes.textContainer}>
-          <SmallRegular text="Buy Now" />
+          <SmallRegular textStyles={classes.text} text="Buy Now" />
         </div>
       </div>
     </span>
