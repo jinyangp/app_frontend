@@ -13,9 +13,21 @@ function SignUp() {
     setIsLoading(true);
     setErrorMessage("");
 
+    function ValidateEmail(inputText) {
+      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (inputText.match(mailformat)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     //checking the password matches
     //if it matches, create a new object with just attributes: username, email, password
-    if (userData.userPassword === userData.userConfirmPassword) {
+    if (
+      userData.userPassword === userData.userConfirmPassword &&
+      ValidateEmail(userData.userEmail)
+    ) {
       const finalUserData = {
         userName: userData.userName,
         userEmail: userData.userEmail,
@@ -52,7 +64,7 @@ function SignUp() {
     }
     //if passwords dont match, do nothing
     else {
-      setErrorMessage("Password does not match");
+      setErrorMessage("Password does not match / Invalid Email");
       setIsLoading(false);
     }
   };
