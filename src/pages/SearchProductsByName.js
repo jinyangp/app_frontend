@@ -4,6 +4,7 @@ import { Grid } from "@material-ui/core";
 import Products from "../components/SearchProductsPage/Products";
 import Utils from "../helper/Utils";
 import { useNavigate, useLocation } from "react-router-dom";
+import LargeBold from "../components/texts/LargeBold";
 
 function SearchProductsByName(props) {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function SearchProductsByName(props) {
 
   const getProducts = () => {
     setIsLoading(true);
+    setProducts([]);
     Utils.getApi("/products/searchItem", {
       productName: state.searchQuery,
     })
@@ -45,7 +47,7 @@ function SearchProductsByName(props) {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [state.searchQuery]);
 
   useEffect(() => {
     console.log(products);
@@ -58,14 +60,7 @@ function SearchProductsByName(props) {
 
     if (!isLoading && products.length == 0) {
       return (
-        <h1
-          style={{
-            textAlign: "center",
-            marginTop: 100,
-          }}
-        >
-          Item Not Found
-        </h1>
+        <h1 style={{ textAlign: "center", marginTop: 250 }}>Item Not Found</h1>
       );
     } else {
       return (
