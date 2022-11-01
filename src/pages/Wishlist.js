@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import MainNavigation from "../components/MainNavigation";
+import AddToWishlistButton from "../components/buttons/AddToWishlistButton";
 
 import { Grid } from "@material-ui/core";
 import WishlistCard from "../components/wishlist/WishlistCard";
@@ -17,8 +18,6 @@ function Wishlist(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1300);
-  
-
 
   const getWishlistItems = () => {
     setIsLoading(true);
@@ -94,9 +93,9 @@ function Wishlist(props) {
     getWishlistItems();
   }, []);
 
-  useEffect(()=>{
-    console.log(wishlistItem)
-  },[wishlistItem]);
+  useEffect(() => {
+    console.log(wishlistItem);
+  }, [wishlistItem]);
 
   // Function to update styles according to viewport's width STEP
   const getStyles = () => {
@@ -124,7 +123,6 @@ function Wishlist(props) {
       },
     });
   };
-
 
   return (
     <div className="default-page-margin">
