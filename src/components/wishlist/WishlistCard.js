@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../../store/store";
 import Utils from "../../helper/Utils";
 import EditTargetPriceModal from "../EditTargetPriceModal";
+import { color } from "@mui/system";
 
 const WishlistCard = ({
   wishlistItem,
@@ -145,10 +146,11 @@ const WishlistCard = ({
 
         <div className={classes.doubleRow}>
           <MediumBold text={"$" + wishlistItem.productPrice.toFixed(2)} />{" "}
-          <MediumRegular
+          <SmallBold
             text={
               "(Target Price: $" + wishlistItem.targetPrice.toFixed(2) + ")"
             }
+            textStyles={classes.targetPriceText}
           />
         </div>
         <div className={classes.doubleRow}>
