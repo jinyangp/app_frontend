@@ -22,6 +22,7 @@ function App() {
             path="/products/:searchQuery"
             element={<SearchProductsByName />}
           />
+          <Route path="/products" element={<SearchProductsByName />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/wishlist" element={<Wishlist />} />
