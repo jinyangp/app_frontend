@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Modal from "@mui/material/Modal";
@@ -36,6 +36,10 @@ const SetTargetPriceModal = ({
   const [count, setCount] = useState(productPrice);
   const [state, dispatch] = useContext(Context);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setCount(productPrice);
+  }, [productPrice]);
 
   const addToWishlistHandler = () => {
     onCloseModal();
