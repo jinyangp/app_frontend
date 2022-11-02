@@ -14,6 +14,7 @@ function Wishlist(props) {
   const [wishlistItem, setWishlistItem] = useState([]);
   const [state, dispatch] = useContext(Context);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1300);
@@ -91,7 +92,7 @@ function Wishlist(props) {
 
   useEffect(() => {
     getWishlistItems();
-  }, [state.userDetails.wishlistIds]);
+  }, [state.userDetails.wishlistIds, isEditing]);
 
   // Function to update styles according to viewport's width STEP
   const getStyles = () => {
@@ -152,6 +153,11 @@ function Wishlist(props) {
           isModalOpen={isModalOpen}
           onCloseModal={() => {
             setIsModalOpen(false);
+          }}
+          onFinishEditHandler={() => {
+            setIsEditing((prevState) => {
+              return !prevState;
+            });
           }}
         />
       ) : (
