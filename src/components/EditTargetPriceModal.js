@@ -18,10 +18,10 @@ const EditTargetPriceModal = ({
   productId,
   isModalOpen,
   onCloseModal,
+  onFinishEditHandler,
   productName,
   productPrice,
-  targetPrice
-
+  targetPrice,
 }) => {
   const style = {
     position: "absolute",
@@ -36,7 +36,7 @@ const EditTargetPriceModal = ({
   };
 
   const [count, setCount] = useState(targetPrice);
-  
+
   const [state, dispatch] = useContext(Context);
   const navigate = useNavigate();
 
@@ -61,16 +61,21 @@ const EditTargetPriceModal = ({
 
         if (res.message && res.message === "Unknown error") {
           console.log("Server error. Please try again.");
-          return;
+          return false;
         }
 
+        return true;
+      })
+      .then((result) => {
+        if (result) {
+          onFinishEditHandler();
+          onCloseModal();
+        }
       })
       .catch((err) => {
-        console.log(err);
         // Show error
+        console.log(err);
       });
-
-      window.location.reload();
   };
 
   const increaseCount = () => {
