@@ -43,7 +43,7 @@ const NotifItem = ({ notif, onReadNotif }) => {
 
     // If timestamp is less than a minute, put no. of seconds
     if (secondElapsed < 60) {
-      return `${Math.floor(secondElapsed.toString())} seconds ago`;
+      return `${Math.floor(secondElapsed).toString()} seconds ago`;
     }
 
     // If timestamp is less than an hour, put no. of minutes
